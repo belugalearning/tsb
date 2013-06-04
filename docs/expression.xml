@@ -1,0 +1,87 @@
+<!--
+Two question types:
+  1) Divide x into y equal groups
+  2) Divide x into equal groups of y
+
+The solution expressions for both question types are identical except that the position of the SWAP-ELM elements are swapped
+-->
+
+<!-- solution expression for "divide x into y equal groups" -->
+<apply>
+  <and/>
+  <apply>
+    <eq/>
+    <apply>
+      <card/>
+      <ci>math-state</ci>
+    </apply>
+    <!-- ** SWAP-ELM FOLLOWS ** -->
+    <ci>y</ci>
+  </apply>
+  <apply>
+    <forall/>
+    <bvar>
+      <ci>set</ci>
+    </bvar>
+    <condition>
+      <apply>
+        <in/>
+        <ci>set</ci>
+        <ci>math-state</ci>
+      </apply>
+    </condition>
+    <apply>
+      <eq/>
+      <apply>
+        <card />
+        <ci>set</ci>
+      </apply>
+      <!-- ** SWAP-ELM FOLLOWS ** -->
+      <apply>
+        <divide />
+        <ci>x</ci>
+        <ci>y</ci>
+      </apply>
+    </apply>
+  </apply>
+</apply>
+
+<!-- solution expression for "divide x into equal groups of y" -->
+<apply>
+  <and/>
+  <apply>
+    <eq/>
+    <apply>
+      <card/>
+      <ci>math-state</ci>
+    </apply>
+    <!-- ** SWAP-ELM FOLLOWS ** -->
+    <apply>
+      <divide />
+      <ci>x</ci>
+      <ci>y</ci>
+    </apply>
+  </apply>
+  <apply>
+    <forall/>
+    <bvar>
+      <ci>set</ci>
+    </bvar>
+    <condition>
+      <apply>
+        <in/>
+        <ci>set</ci>
+        <ci>math-state</ci>
+      </apply>
+    </condition>
+    <apply>
+      <eq/>
+      <apply>
+        <card />
+        <ci>set</ci>
+      </apply>
+      <!-- ** SWAP-ELM FOLLOWS ** -->
+      <ci>y</ci>
+    </apply>
+  </apply>
+</apply>
