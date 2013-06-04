@@ -1,8 +1,6 @@
- [ 
-  {
-    "_id":  "1002",
-    "_rev": "001",
-    "title": "Bundle 2",
-    "author": "Artoo Deetoo"
-  }
-]
+ {
+   "_id":  "1001",
+   "_rev": "001",
+   "title": "Linear Equations 1",
+   "author": "Bob Balaban"
+ }

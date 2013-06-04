@@ -10,6 +10,9 @@ define (require) ->
       tmpl = @template()
       @$el.html( tmpl )
       @
+
+    wire: =>
+      return
     
     cleanup: =>
       @remove()

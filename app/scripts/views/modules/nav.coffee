@@ -7,7 +7,7 @@ define (require) ->
     template: _.template(NavTemplate)
 
     events:
-      "click a": "navigate"
+      "click a.navlink": "navigate"
 
     initialize: ->
       @page = @options.page
@@ -17,13 +17,11 @@ define (require) ->
       @$el.html( tmpl )
 
     navigate: (e) =>
-      console.log "nav navigate: " + e.target.attributes.href.value
       e.preventDefault()
       @setHighlight("." + e.target.attributes.href.value)
       Backbone.history.navigate(e.target.attributes.href.value, true)
 
     setSelection: (selection) =>
-      console.log "set selection: " + selection
       @setHighlight("." + selection.split('_')[0])
       @options.page.subnav.swap(selection)
 

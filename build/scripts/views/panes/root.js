@@ -13,6 +13,7 @@
 
       function Root() {
         this.cleanup = __bind(this.cleanup, this);
+        this.wire = __bind(this.wire, this);
         this.render = __bind(this.render, this);        _ref = Root.__super__.constructor.apply(this, arguments);
         return _ref;
       }
@@ -26,6 +27,8 @@
         this.$el.html(tmpl);
         return this;
       };
+
+      Root.prototype.wire = function() {};
 
       Root.prototype.cleanup = function() {
         return this.remove();

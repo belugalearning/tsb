@@ -39,13 +39,11 @@
       };
 
       Subnav.prototype.swap = function(nav) {
-        console.log("subnav swap: " + nav);
         if (this.current && (this.current === nav.split('_')[0])) {
           this.setHighlight("." + nav.split('_').slice(-1)[0]);
           return;
         }
         this.current = nav.split('_')[0];
-        console.log("subnav @current: " + this.current);
         if (this.current === "blank") {
           this.template = _.template(BlankSubnavTemplate);
         } else if (this.current === "bundle") {
@@ -58,7 +56,6 @@
       };
 
       Subnav.prototype.setHighlight = function(navEl) {
-        console.log("sub hilight: " + navEl);
         this.$el.find('a').removeClass("active");
         return this.$el.find(navEl).addClass("active");
       };

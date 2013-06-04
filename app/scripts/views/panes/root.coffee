@@ -11,5 +11,8 @@ define (require) ->
       @$el.html( tmpl )
       @
     
+    wire: =>
+      return
+      
     cleanup: =>
       @remove()

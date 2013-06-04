@@ -7,9 +7,13 @@ app.use(liveReload.livereloadSnippet);
 
 app.use(express.static(__dirname + '/build'));
 
+app.get('/api/bundle/*', function(req,res) {
+  res.sendfile(__dirname + '/app/api/bundle.json')
+});
+
 app.get('/api/*', function(req,res) {
   console.log(req.url);
-    res.sendfile(__dirname + '/app/api/' + req.url.split("/").slice(-1)[0] + '.json');
+    res.sendfile(__dirname + '/app/api/' + req.url.split("/").slice(-1)[0].split("?")[0] + '.json');
 });
 
 app.get('*', function(req,res) { res.sendfile(__dirname + '/app/index.html'); });

@@ -13,3 +13,6 @@ define (require) ->
 
     cleanup: =>
       @remove()
+
+    wire: =>
+      return

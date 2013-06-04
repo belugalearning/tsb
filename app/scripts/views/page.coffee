@@ -18,7 +18,7 @@ define (require) ->
     template: _.template(MainLayout)
 
     events:
-      "click" : 'ping'
+      "click a.home": "navigateHome"
 
     initialize: ->
       @navEl = @options.navEl
@@ -58,5 +58,10 @@ define (require) ->
       if @$pane
         @$pane.empty()
       @$el.find('#pane-container').html( @currentPane.render().el )
+      @currentPane.wire()
 
+    navigateHome: (e) =>
+      e.preventDefault()
+      Backbone.history.navigate(e.target.attributes.href.value, true)
+      console.log "ping"
     

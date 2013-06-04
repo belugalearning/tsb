@@ -14,6 +14,8 @@
         return _ref;
       }
 
+      BundleModel.prototype.urlRoot = "/api/bundle";
+
       return BundleModel;
 
     })(Backbone.Model);

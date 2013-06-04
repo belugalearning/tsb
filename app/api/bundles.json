@@ -2,25 +2,25 @@
   {
     "_id":  "1001",
     "_rev": "001",
-    "title": "Bundle 1",
+    "title": "Linear Equations 1",
     "author": "Bob Balaban"
   },
   {
     "_id":  "1002",
     "_rev": "001",
-    "title": "Bundle 2",
+    "title": "Linear Equations 2",
     "author": "Bob Balaban"
   },
   {
     "_id":  "1003",
     "_rev": "001",
-    "title": "Bundle 3",
+    "title": "Algebra",
     "author": "Paul Dirac"
   },
   {
     "_id":  "1004",
     "_rev": "001",
-    "title": "Bundle 4",
+    "title": "Differential Equations 1",
     "author": "Cee Threepio"
   }
 ]

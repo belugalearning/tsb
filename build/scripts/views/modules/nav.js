@@ -22,7 +22,7 @@
       Nav.prototype.template = _.template(NavTemplate);
 
       Nav.prototype.events = {
-        "click a": "navigate"
+        "click a.navlink": "navigate"
       };
 
       Nav.prototype.initialize = function() {
@@ -37,14 +37,12 @@
       };
 
       Nav.prototype.navigate = function(e) {
-        console.log("nav navigate: " + e.target.attributes.href.value);
         e.preventDefault();
         this.setHighlight("." + e.target.attributes.href.value);
         return Backbone.history.navigate(e.target.attributes.href.value, true);
       };
 
       Nav.prototype.setSelection = function(selection) {
-        console.log("set selection: " + selection);
         this.setHighlight("." + selection.split('_')[0]);
         return this.options.page.subnav.swap(selection);
       };

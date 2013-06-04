@@ -1,28 +1,26 @@
-[ 
-  { 
-    "name": "Test Set 1",
-    "bundles": 
-      [ 
+{ 
+  "name": "Test Set 1",
+  "bundles": 
+    [ 
+      {
+        "ordinal": 1,
+        "bundle":
         {
-          "ordinal": 1,
-          "bundle":
-          {
-            "_id":  "1001",
-            "_rev": "001",
-            "title": "Bundle 1",
-            "author": "Bob Balaban"
-          }
-        },
-        { 
-          "ordinal": 2,
-          "bundle":
-          {
-            "_id":  "1002",
-            "_rev": "001",
-            "title": "Bundle 2",
-            "author": "Bob Balaban"
-          }
+          "_id":  "1001",
+          "_rev": "001",
+          "title": "Bundle 1",
+          "author": "Bob Balaban"
         }
-      ]
-  }
-]
+      },
+      { 
+        "ordinal": 2,
+        "bundle":
+        {
+          "_id":  "1002",
+          "_rev": "001",
+          "title": "Bundle 2",
+          "author": "Bob Balaban"
+        }
+      }
+    ]
+}

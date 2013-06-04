@@ -26,7 +26,7 @@
         '/': 'showRoot',
         'bundle': 'showBundleList',
         'bundle/new': 'showBundleNew',
-        'bundle/view': 'showBundleView',
+        'bundle/view/:id': 'showBundleView',
         'set': 'showSet',
         'analytics': 'showAnalytics',
         'account': 'showAccount'
@@ -44,7 +44,8 @@
         return this.app.setCurrentPane('bundle');
       };
 
-      MainRouter.prototype.showBundleView = function() {
+      MainRouter.prototype.showBundleView = function(id) {
+        window.bundleViewID = id;
         return this.app.setCurrentPane('bundle_view');
       };
 

@@ -8,7 +8,7 @@ define (require) ->
       '/'               : 'showRoot'
       'bundle'          : 'showBundleList'
       'bundle/new'      : 'showBundleNew'
-      'bundle/view'     : 'showBundleView'
+      'bundle/view/:id' : 'showBundleView'
       'set'             : 'showSet'
       'analytics'       : 'showAnalytics'
       'account'         : 'showAccount'
@@ -22,7 +22,8 @@ define (require) ->
     showBundleList: =>
       @app.setCurrentPane('bundle')
 
-    showBundleView: =>
+    showBundleView: (id) =>
+      window.bundleViewID = id
       @app.setCurrentPane('bundle_view')
 
     showBundleNew: =>

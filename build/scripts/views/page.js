@@ -21,6 +21,7 @@
       __extends(Page, _super);
 
       function Page() {
+        this.navigateHome = __bind(this.navigateHome, this);
         this.displayPane = __bind(this.displayPane, this);
         this.injectNav = __bind(this.injectNav, this);
         this.render = __bind(this.render, this);        _ref = Page.__super__.constructor.apply(this, arguments);
@@ -30,7 +31,7 @@
       Page.prototype.template = _.template(MainLayout);
 
       Page.prototype.events = {
-        "click": 'ping'
+        "click a.home": "navigateHome"
       };
 
       Page.prototype.initialize = function() {
@@ -78,7 +79,14 @@
         if (this.$pane) {
           this.$pane.empty();
         }
-        return this.$el.find('#pane-container').html(this.currentPane.render().el);
+        this.$el.find('#pane-container').html(this.currentPane.render().el);
+        return this.currentPane.wire();
+      };
+
+      Page.prototype.navigateHome = function(e) {
+        e.preventDefault();
+        Backbone.history.navigate(e.target.attributes.href.value, true);
+        return console.log("ping");
       };
 
       return Page;

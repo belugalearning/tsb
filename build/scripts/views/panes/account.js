@@ -12,6 +12,7 @@
       __extends(AccountPane, _super);
 
       function AccountPane() {
+        this.wire = __bind(this.wire, this);
         this.cleanup = __bind(this.cleanup, this);
         this.render = __bind(this.render, this);        _ref = AccountPane.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -30,6 +31,8 @@
       AccountPane.prototype.cleanup = function() {
         return this.remove();
       };
+
+      AccountPane.prototype.wire = function() {};
 
       return AccountPane;
 

@@ -4,7 +4,7 @@ define (require) ->
   QuestionView = require 'views/questions/test_question'
   BundleNewTemplate = require 'text!templates/panes/bundle_new.html'
 
-  class BundleNew extends Backbone.View
+  class BundleNewPane extends Backbone.View
     template: _.template(BundleNewTemplate)
 
     events: 
@@ -19,5 +19,8 @@ define (require) ->
       e.preventDefault()
       @question = new QuestionView({ el: ".question-container"}).render()
 
+    wire: =>
+      return
+      
     cleanup: =>
       @remove()

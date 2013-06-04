@@ -12,6 +12,7 @@
       __extends(AnalyticsPane, _super);
 
       function AnalyticsPane() {
+        this.wire = __bind(this.wire, this);
         this.cleanup = __bind(this.cleanup, this);
         this.render = __bind(this.render, this);        _ref = AnalyticsPane.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -30,6 +31,8 @@
       AnalyticsPane.prototype.cleanup = function() {
         return this.remove();
       };
+
+      AnalyticsPane.prototype.wire = function() {};
 
       return AnalyticsPane;
 
