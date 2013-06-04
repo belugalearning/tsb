@@ -10,7 +10,6 @@ define (require) ->
       @init_page()
       window.router = new Router({ app: @})
       Backbone.history.start({ pushState: true})
-      console.log("App init")
 
     init_page: =>
       @pageView = new PageView({el: "#beluga-tsb", navEl: "#nav", subnavEl: "#subnav"})

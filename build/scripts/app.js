@@ -23,10 +23,9 @@
         window.router = new Router({
           app: this
         });
-        Backbone.history.start({
+        return Backbone.history.start({
           pushState: true
         });
-        return console.log("App init");
       };
 
       App.prototype.init_page = function() {

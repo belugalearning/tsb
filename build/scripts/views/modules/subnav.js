@@ -13,7 +13,7 @@
       __extends(Subnav, _super);
 
       function Subnav() {
-        this.highlight = __bind(this.highlight, this);
+        this.setHighlight = __bind(this.setHighlight, this);
         this.swap = __bind(this.swap, this);
         this.navigate = __bind(this.navigate, this);
         this.render = __bind(this.render, this);        _ref = Subnav.__super__.constructor.apply(this, arguments);
@@ -39,13 +39,13 @@
       };
 
       Subnav.prototype.swap = function(nav) {
-        console.log("swap");
-        console.log(nav);
+        console.log("subnav swap: " + nav);
         if (this.current && (this.current === nav.split('_')[0])) {
-          this.highlight(nav.split('_')[0]);
+          this.setHighlight("." + nav.split('_').slice(-1)[0]);
           return;
         }
-        this.current = nav.split('_').slice(-1)[0];
+        this.current = nav.split('_')[0];
+        console.log("subnav @current: " + this.current);
         if (this.current === "blank") {
           this.template = _.template(BlankSubnavTemplate);
         } else if (this.current === "bundle") {
@@ -53,13 +53,13 @@
         } else {
           this.template = _.template(BlankSubnavTemplate);
         }
-        return this.render();
+        this.render();
+        return this.setHighlight("." + nav.split('_').slice(-1)[0]);
       };
 
-      Subnav.prototype.highlight = function(navEl) {
-        console.log("highlight");
-        console.log(navEl);
-        this.$el.find("a").removeClass("active");
+      Subnav.prototype.setHighlight = function(navEl) {
+        console.log("sub hilight: " + navEl);
+        this.$el.find('a').removeClass("active");
         return this.$el.find(navEl).addClass("active");
       };
 

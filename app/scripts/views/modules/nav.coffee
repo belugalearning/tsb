@@ -17,9 +17,16 @@ define (require) ->
       @$el.html( tmpl )
 
     navigate: (e) =>
+      console.log "nav navigate: " + e.target.attributes.href.value
       e.preventDefault()
-      @setSelection(e.target.attributes.href.value)
+      @setHighlight("." + e.target.attributes.href.value)
       Backbone.history.navigate(e.target.attributes.href.value, true)
 
     setSelection: (selection) =>
+      console.log "set selection: " + selection
+      @setHighlight("." + selection.split('_')[0])
       @options.page.subnav.swap(selection)
+
+    setHighlight: (highlighEl) =>
+      @$el.find('a').removeClass("active")
+      @$el.find(highlighEl).addClass("active")

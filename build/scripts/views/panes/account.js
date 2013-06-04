@@ -28,7 +28,6 @@
       };
 
       AccountPane.prototype.cleanup = function() {
-        console.log("remove");
         return this.remove();
       };
 

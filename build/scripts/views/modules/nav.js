@@ -12,6 +12,7 @@
       __extends(Nav, _super);
 
       function Nav() {
+        this.setHighlight = __bind(this.setHighlight, this);
         this.setSelection = __bind(this.setSelection, this);
         this.navigate = __bind(this.navigate, this);
         this.render = __bind(this.render, this);        _ref = Nav.__super__.constructor.apply(this, arguments);
@@ -36,13 +37,21 @@
       };
 
       Nav.prototype.navigate = function(e) {
+        console.log("nav navigate: " + e.target.attributes.href.value);
         e.preventDefault();
-        this.setSelection(e.target.attributes.href.value);
+        this.setHighlight("." + e.target.attributes.href.value);
         return Backbone.history.navigate(e.target.attributes.href.value, true);
       };
 
       Nav.prototype.setSelection = function(selection) {
+        console.log("set selection: " + selection);
+        this.setHighlight("." + selection.split('_')[0]);
         return this.options.page.subnav.swap(selection);
+      };
+
+      Nav.prototype.setHighlight = function(highlighEl) {
+        this.$el.find('a').removeClass("active");
+        return this.$el.find(highlighEl).addClass("active");
       };
 
       return Nav;

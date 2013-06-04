@@ -19,12 +19,12 @@ define (require) ->
       Backbone.history.navigate(e.target.attributes.href.value, true)
 
     swap: (nav) =>
-      console.log "swap"
-      console.log nav
+      console.log "subnav swap: " + nav
       if @current && (@current == nav.split('_')[0])
-        @highlight(nav.split('_')[0])
+        @setHighlight("." + nav.split('_').slice(-1)[0])
         return
-      @current = nav.split('_').slice(-1)[0]
+      @current = nav.split('_')[0]
+      console.log "subnav @current: " + @current
       if @current == "blank"
         @template = _.template(BlankSubnavTemplate)
       else if @current == "bundle"
@@ -32,10 +32,11 @@ define (require) ->
       else
         @template = _.template(BlankSubnavTemplate)
       @render()
+      @setHighlight("." + nav.split('_').slice(-1)[0])
+      
 
 
-    highlight: (navEl) =>
-      console.log "highlight"
-      console.log navEl
-      @$el.find("a").removeClass("active")
+    setHighlight: (navEl) =>
+      console.log "sub hilight: " + navEl
+      @$el.find('a').removeClass("active")
       @$el.find(navEl).addClass("active")

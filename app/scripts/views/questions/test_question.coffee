@@ -23,12 +23,10 @@ define (require) ->
       # TODO: get data, populate model, save
       form_data = @getFormData()
       question = new QuestionModel( form_data )
-      console.log question
 
     preview: (e) =>
       e.preventDefault()
       form_data = @getFormData()
-      console.log "DOIT"
       # make preview
 
     getFormData: =>
