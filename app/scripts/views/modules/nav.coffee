@@ -18,4 +18,8 @@ define (require) ->
 
     navigate: (e) =>
       e.preventDefault()
+      @setSelection(e.target.attributes.href.value)
       Backbone.history.navigate(e.target.attributes.href.value, true)
+
+    setSelection: (selection) =>
+      @options.page.subnav.swap(selection)

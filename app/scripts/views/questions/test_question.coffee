@@ -9,6 +9,7 @@ define (require) ->
 
     events:
       "click :submit": "submit"
+      "click .preview": "preview"
 
     initialize: ->
       @page = @options.page
@@ -20,6 +21,17 @@ define (require) ->
     submit: (e) =>
       e.preventDefault()
       # TODO: get data, populate model, save
+      form_data = @getFormData()
+      question = new QuestionModel( form_data )
+      console.log question
+
+    preview: (e) =>
+      e.preventDefault()
+      form_data = @getFormData()
+      console.log "DOIT"
+      # make preview
+
+    getFormData: =>
       form_data = 
         equation_x_from:  @getFormVal('.x-from')
         equation_x_to:    @getFormVal('.x-to')
@@ -27,9 +39,6 @@ define (require) ->
         solution_output:  @getFormVal('.solution-output')
         tool:             @getFormVal('.tool')
         bundle_output:    @getFormVal('.bundle-output')
-      console.log form_data
-      question = new QuestionModel( form_data )
-      console.log question
 
     getFormVal: (selector) =>
       @$el.find(selector).val()

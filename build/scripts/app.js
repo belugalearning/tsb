@@ -32,8 +32,8 @@
       App.prototype.init_page = function() {
         this.pageView = new PageView({
           el: "#beluga-tsb",
-          nav: "#page-nav",
-          subnav: "#page-subnav"
+          navEl: "#nav",
+          subnavEl: "#subnav"
         });
         return this.pageView.render();
       };

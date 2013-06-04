@@ -4,7 +4,9 @@ define (require) ->
   MainLayout = require 'text!templates/layouts/index.html'
 
   RootPane          = require 'views/panes/root'
-  CreateContentPane = require 'views/panes/create_content'
+  BundleList        = require 'views/panes/bundle_list'
+  BundleNew         = require 'views/panes/bundle_new'
+  BundleView        = require 'views/panes/bundle_view'
   ShareContentPane  = require 'views/panes/share_content'
   AnalyticsPane     = require 'views/panes/analytics'
   AccountPane       = require 'views/panes/account'
@@ -19,13 +21,15 @@ define (require) ->
       "click" : 'ping'
 
     initialize: ->
-      @nav = @options.nav
-      @subnav = @options.subnav
+      @navEl = @options.navEl
+      @subnavEl = @options.subnavEl
       @currentPane = null
       @panes = 
         "root"            : RootPane
-        "create_content"  : CreateContentPane
-        "share_content"   : ShareContentPane
+        "bundle"          : BundleList
+        "bundle_new"      : BundleNew
+        "bundle_view"     : BundleView
+        "set"             : ShareContentPane
         "analytics"       : AnalyticsPane
         "account"         : AccountPane
 
@@ -35,10 +39,13 @@ define (require) ->
       @injectNav()
 
     injectNav: =>
-      @nav = new NavView({ el: "#nav", page: @})
+      @nav = new NavView(
+        el: @navEl
+        page: @
+      )
       @nav.render()
       @subnav = new SubnavView(
-        el: "#subnav"
+        el: @subnavEl
         page: @
       )
       @subnav.render()
@@ -48,6 +55,7 @@ define (require) ->
       if @currentPane
         @currentPane.cleanup()
       @currentPane = new @panes[page]
+      @nav.setSelection(page)
       if @$pane
         @$pane.empty()
       @$el.find('#pane-container').html( @currentPane.render().el )

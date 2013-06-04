@@ -13,7 +13,7 @@ define (require) ->
       console.log("App init")
 
     init_page: =>
-      @pageView = new PageView({el: "#beluga-tsb", nav: "#page-nav", subnav: "#page-subnav"})
+      @pageView = new PageView({el: "#beluga-tsb", navEl: "#nav", subnavEl: "#subnav"})
       @pageView.render()
 
     setCurrentPane: (page) =>

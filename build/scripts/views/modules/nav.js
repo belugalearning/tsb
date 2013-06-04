@@ -12,6 +12,7 @@
       __extends(Nav, _super);
 
       function Nav() {
+        this.setSelection = __bind(this.setSelection, this);
         this.navigate = __bind(this.navigate, this);
         this.render = __bind(this.render, this);        _ref = Nav.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -36,7 +37,12 @@
 
       Nav.prototype.navigate = function(e) {
         e.preventDefault();
+        this.setSelection(e.target.attributes.href.value);
         return Backbone.history.navigate(e.target.attributes.href.value, true);
+      };
+
+      Nav.prototype.setSelection = function(selection) {
+        return this.options.page.subnav.swap(selection);
       };
 
       return Nav;

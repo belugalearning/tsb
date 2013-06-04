@@ -4,12 +4,14 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   define(function(require) {
-    var AccountPane, AnalyticsPane, Backbone, CreateContentPane, MainLayout, NavView, Page, RootPane, ShareContentPane, SubnavView, _ref;
+    var AccountPane, AnalyticsPane, Backbone, BundleList, BundleNew, BundleView, MainLayout, NavView, Page, RootPane, ShareContentPane, SubnavView, _ref;
 
     Backbone = require('backbone');
     MainLayout = require('text!templates/layouts/index.html');
     RootPane = require('views/panes/root');
-    CreateContentPane = require('views/panes/create_content');
+    BundleList = require('views/panes/bundle_list');
+    BundleNew = require('views/panes/bundle_new');
+    BundleView = require('views/panes/bundle_view');
     ShareContentPane = require('views/panes/share_content');
     AnalyticsPane = require('views/panes/analytics');
     AccountPane = require('views/panes/account');
@@ -32,13 +34,15 @@
       };
 
       Page.prototype.initialize = function() {
-        this.nav = this.options.nav;
-        this.subnav = this.options.subnav;
+        this.navEl = this.options.navEl;
+        this.subnavEl = this.options.subnavEl;
         this.currentPane = null;
         return this.panes = {
           "root": RootPane,
-          "create_content": CreateContentPane,
-          "share_content": ShareContentPane,
+          "bundle": BundleList,
+          "bundle_new": BundleNew,
+          "bundle_view": BundleView,
+          "set": ShareContentPane,
           "analytics": AnalyticsPane,
           "account": AccountPane
         };
@@ -54,12 +58,12 @@
 
       Page.prototype.injectNav = function() {
         this.nav = new NavView({
-          el: "#nav",
+          el: this.navEl,
           page: this
         });
         this.nav.render();
         this.subnav = new SubnavView({
-          el: "#subnav",
+          el: this.subnavEl,
           page: this
         });
         return this.subnav.render();
@@ -71,6 +75,7 @@
           this.currentPane.cleanup();
         }
         this.currentPane = new this.panes[page];
+        this.nav.setSelection(page);
         if (this.$pane) {
           this.$pane.empty();
         }

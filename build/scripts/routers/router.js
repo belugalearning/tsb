@@ -13,8 +13,10 @@
       function MainRouter() {
         this.showAccount = __bind(this.showAccount, this);
         this.showAnalytics = __bind(this.showAnalytics, this);
-        this.showShareContent = __bind(this.showShareContent, this);
-        this.showCreateContent = __bind(this.showCreateContent, this);
+        this.showSet = __bind(this.showSet, this);
+        this.showBundleNew = __bind(this.showBundleNew, this);
+        this.showBundleView = __bind(this.showBundleView, this);
+        this.showBundleList = __bind(this.showBundleList, this);
         this.showRoot = __bind(this.showRoot, this);        _ref = MainRouter.__super__.constructor.apply(this, arguments);
         return _ref;
       }
@@ -22,8 +24,10 @@
       MainRouter.prototype.routes = {
         '': 'showRoot',
         '/': 'showRoot',
-        'create_content': 'showCreateContent',
-        'share_content': 'showShareContent',
+        'bundle': 'showBundleList',
+        'bundle/new': 'showBundleNew',
+        'bundle/view': 'showBundleView',
+        'set': 'showSet',
         'analytics': 'showAnalytics',
         'account': 'showAccount'
       };
@@ -36,12 +40,20 @@
         return this.app.setCurrentPane('root');
       };
 
-      MainRouter.prototype.showCreateContent = function() {
-        return this.app.setCurrentPane('create_content');
+      MainRouter.prototype.showBundleList = function() {
+        return this.app.setCurrentPane('bundle');
       };
 
-      MainRouter.prototype.showShareContent = function() {
-        return this.app.setCurrentPane('share_content');
+      MainRouter.prototype.showBundleView = function() {
+        return this.app.setCurrentPane('bundle_view');
+      };
+
+      MainRouter.prototype.showBundleNew = function() {
+        return this.app.setCurrentPane('bundle_new');
+      };
+
+      MainRouter.prototype.showSet = function() {
+        return this.app.setCurrentPane('set');
       };
 
       MainRouter.prototype.showAnalytics = function() {

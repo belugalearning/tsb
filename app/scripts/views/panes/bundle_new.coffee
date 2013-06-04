@@ -2,10 +2,10 @@ define (require) ->
 
   Backbone = require 'backbone'
   QuestionView = require 'views/questions/test_question'
-  CreateContentTemplate = require 'text!templates/panes/create_content.html'
+  BundleNewTemplate = require 'text!templates/panes/bundle_new.html'
 
-  class CreateContent extends Backbone.View
-    template: _.template(CreateContentTemplate)
+  class BundleNew extends Backbone.View
+    template: _.template(BundleNewTemplate)
 
     events: 
       "click .add-question" : "insertQuestion"

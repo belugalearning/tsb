@@ -6,8 +6,10 @@ define (require) ->
     routes:
       ''                : 'showRoot'
       '/'               : 'showRoot'
-      'create_content'  : 'showCreateContent'
-      'share_content'   : 'showShareContent'
+      'bundle'          : 'showBundleList'
+      'bundle/new'      : 'showBundleNew'
+      'bundle/view'     : 'showBundleView'
+      'set'             : 'showSet'
       'analytics'       : 'showAnalytics'
       'account'         : 'showAccount'
 
@@ -17,11 +19,17 @@ define (require) ->
     showRoot: =>
       @app.setCurrentPane('root')
 
-    showCreateContent: =>
-      @app.setCurrentPane('create_content')
+    showBundleList: =>
+      @app.setCurrentPane('bundle')
+
+    showBundleView: =>
+      @app.setCurrentPane('bundle_view')
+
+    showBundleNew: =>
+      @app.setCurrentPane('bundle_new')
     
-    showShareContent: =>
-      @app.setCurrentPane('share_content')
+    showSet: =>
+      @app.setCurrentPane('set')
 
     showAnalytics: =>
       @app.setCurrentPane('analytics')

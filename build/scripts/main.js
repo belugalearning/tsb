@@ -58,6 +58,7 @@
   require([
     'app'
   ], function (App) {
+    $.ajaxSetup({ cache: false });
     window.app = new App();
   });
 
