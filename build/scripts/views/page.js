@@ -70,7 +70,6 @@
       };
 
       Page.prototype.displayPane = function(page) {
-        console.log("displaying page " + page);
         if (this.currentPane) {
           this.currentPane.cleanup();
         }

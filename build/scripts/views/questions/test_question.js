@@ -45,16 +45,14 @@
 
         e.preventDefault();
         form_data = this.getFormData();
-        question = new QuestionModel(form_data);
-        return console.log(question);
+        return question = new QuestionModel(form_data);
       };
 
       TestQuestion.prototype.preview = function(e) {
         var form_data;
 
         e.preventDefault();
-        form_data = this.getFormData();
-        return console.log("DOIT");
+        return form_data = this.getFormData();
       };
 
       TestQuestion.prototype.getFormData = function() {

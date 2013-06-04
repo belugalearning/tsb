@@ -12,5 +12,4 @@ define (require) ->
       @
 
     cleanup: =>
-      console.log "remove"
       @remove()

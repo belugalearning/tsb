@@ -1,7 +1,7 @@
 
 #setup
 
-    npm install && bower install
+    npm install
 
 
 # development

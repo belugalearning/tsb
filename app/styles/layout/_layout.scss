@@ -31,31 +31,8 @@
     .nav {
       padding-left: 15px;
     }
-    .insight, .admin {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    .insight {
-      &.active {
-        color: $color-header-selected;
-      }
-      &:hover {
-        color: $color-beluga-orange;
-      }
-    }
-    .admin {
-      &.active {
-        color: $color-header-selected;
-      }
-      &:hover {
-        color: $color-beluga-orange;
-      }
-    }
-    .user-actions {
-      a {
-        color: #fff;
-        padding-left: 5px;
-      }
+    a.active {
+      color: white;
     }
   }
   .subnav {

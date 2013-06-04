@@ -51,7 +51,6 @@ define (require) ->
       @subnav.render()
 
     displayPane: (page) =>
-      console.log "displaying page " + page
       if @currentPane
         @currentPane.cleanup()
       @currentPane = new @panes[page]

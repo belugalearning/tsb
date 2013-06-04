@@ -6862,53 +6862,31 @@ h3 {
   padding-left: 15px;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000334}}
-.main-header .navbar-inner .insight, .main-header .navbar-inner .admin {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000339}}
-.main-header .navbar-inner .insight.active {
+.main-header .navbar-inner a.active {
   color: white;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000342}}
-.main-header .navbar-inner .insight:hover {
-  color: #e59527;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000347}}
-.main-header .navbar-inner .admin.active {
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000350}}
-.main-header .navbar-inner .admin:hover {
-  color: #e59527;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000355}}
-.main-header .navbar-inner .user-actions a {
-  color: #fff;
-  padding-left: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000338}}
 .main-header .subnav {
   background-color: #444444;
   height: 45px;
   line-height: 45px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000342}}
 .main-header .subnav a {
   color: #8f8f8f;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000344}}
 .main-header .subnav a.active {
   color: #fff;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000371}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000348}}
 .main-header .subnav ul {
   display: block;
   list-style: none;
   float: left;
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000376}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Dropbox\/Dropbox\/designsuperbuild\/client\/beluga_learning\/dev\/tsb\/app\/styles\/layout\/_layout\.scss}line{font-family:\0000353}}
 .main-header .subnav ul li {
   padding: 0 28px 0 0;
   line-height: 45px;
