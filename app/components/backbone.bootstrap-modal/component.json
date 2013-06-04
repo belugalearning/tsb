@@ -1,0 +1,8 @@
+{
+  "name": "backbone.bootstrap-modal",
+  "version": "0.9.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dburrows/backbone.bootstrap-modal.git"
+  }
+}

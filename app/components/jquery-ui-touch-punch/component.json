@@ -1,0 +1,9 @@
+{
+  "name": "jquery-ui-touch-punch",
+  "version": "0.0.0",
+  "commit": "72d67b63c98a6d9c324881343fcd423b88939ccf",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/furf/jquery-ui-touch-punch.git"
+  }
+}

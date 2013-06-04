@@ -1,0 +1,9 @@
+{
+  "name": "squire",
+  "version": "0.0.0",
+  "commit": "7e987e6fb3d253fe0d8cd6b4bc550d77a883c0cf",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iammerrick/Squire.js.git"
+  }
+}

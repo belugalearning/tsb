@@ -1,0 +1,26 @@
+[
+  {
+    "_id":  "1001",
+    "_rev": "001",
+    "title": "Bundle 1",
+    "author": "Bob Balaban"
+  },
+  {
+    "_id":  "1002",
+    "_rev": "001",
+    "title": "Bundle 2",
+    "author": "Bob Balaban"
+  },
+  {
+    "_id":  "1003",
+    "_rev": "001",
+    "title": "Bundle 3",
+    "author": "Paul Dirac"
+  },
+  {
+    "_id":  "1004",
+    "_rev": "001",
+    "title": "Bundle 4",
+    "author": "Cee Threepio"
+  }
+]

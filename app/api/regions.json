@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "0c94fdf0-6dc0-3aeb-0412-911355d23ca8",
+    "_rev": "1-b11c6468a2ca635f90ae55d8b3262b24",
+    "type": "region",
+    "name": "patterns and rules",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  },
+  {
+    "_id": "5d506bea-2808-dd7c-5a5b-9e87a09ec33e",
+    "_rev": "1-e09a56e521e95edbfb34b2a1718bd9c2",
+    "type": "region",
+    "name": "counting, matching and sorting",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  },
+  {
+    "_id": "8339d653-4b10-ddd6-ddf7-1a4ae73567cf",
+    "_rev": "1-2708748906a2a01c2cc89729c8a940a7",
+    "type": "region",
+    "name": "arithmetic",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  },
+  {
+    "_id": "8962743f-b380-2e1f-d6ce-931f18eb541b",
+    "_rev": "1-989c8fafd3d5b64b870706662dd40057",
+    "type": "region",
+    "name": "fractions, decimals, percentages, ratio & proportion",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  },
+  {
+    "_id": "9a1bd321-13d9-5b6d-5ebf-b1ddc1b32f2c",
+    "_rev": "1-5cb70691c8d2ac1ddbe9ec146038e41a",
+    "type": "region",
+    "name": "place value",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  },
+  {
+    "_id": "9aae1e5c-66ff-a070-0810-89f50e8c4558",
+    "_rev": "1-bb41bb2acfee8651fdf3092b501031fb",
+    "type": "region",
+    "name": "directed numbers",
+    "topic": "436b6b4e-ee41-9b0b-02a2-55afc4daca8c"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "name": "designsuperbuild-boilerplate",
+  "version": "0.0.0",
+  "dependencies": {
+    "sass-bootstrap": "~2.3.0",
+    "requirejs": "~2.1.6",
+    "requirejs-text": "2.0.5",
+    "jquery": "~1.9.1",
+    "parsley": "git://github.com/dburrows/Parsley.js.git",
+    "jquery-dateFormat": "git://github.com/dburrows/jquery-dateFormat.git",
+    "jquery-ui": "~1.10.3",
+    "lodash": "~1.2.1",
+    "backbone": "~1.0.0",
+    "backbone.bootstrap-modal": "git://github.com/dburrows/backbone.bootstrap-modal.git",
+    "backbone.localstorage": "git://github.com/jeromegn/Backbone.localStorage.git",
+    "jquery-ui-touch-punch": "git://github.com/furf/jquery-ui-touch-punch.git",
+    "mocha": "~1.9.0",
+    "chai": "~1.6.0",
+    "squire": "latest"
+  }
+}

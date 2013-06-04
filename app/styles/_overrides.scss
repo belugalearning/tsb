@@ -1,0 +1,49 @@
+/*
+  SAP VARIABLES
+*/
+
+/* colors */
+$color-dark-grey:             #363636;
+$color-dark-grey-secondary:   #444444;
+$color-beluga-orange:         #e59527;
+$color-text:                  #333333;
+$color-text-unselected:       #8f8f8f;
+$color-red:                   #ee4f4f;
+$color-background:            #ffffff;
+
+$color-header-selected: #ffffff;
+$color-divider: #e4e4e4;
+/* colors - zebra stripes */
+$color-grey-row-even:              #ffffff;
+$color-grey-row-odd:               #f1f6f7;
+$color-grey-odd-accent:               #ebf0f1;
+$color-grey-even-accent:              #f8f8f8;
+
+/* box radius */
+$sap_radius: 6px;
+
+/*
+  BOOTSTRAP VARIABLES
+*/
+
+$iconSpritePath: "/images/icons/glyphicons-halflings.png";
+$iconWhiteSpritePath: "/images/icons/glyphicons-halflings-white.png";
+
+// $navbarHeight: 65px;
+$navbarBackground: $color-dark-grey;
+$navbarBackgroundHighlight: $color-dark-grey;
+$navbarText: $color-text-unselected;
+$navbarBrandColor: $color-beluga-orange;
+$navbarLinkColor: $color-text-unselected;
+$navbarLinkColorHover: $color-beluga-orange;
+$navbarLinkColorActive: $color-header-selected;
+$navbarLinkBackgroundHover: $color-dark-grey;
+$navbarLinkBackgroundActive: $color-dark-grey;
+// $navbarSearchBackground:
+// $navbarSearchBackgroundFocus:
+// $navbarSearchBorder:
+// $navbarSearchPlaceholderColor:
+// $navbarCollapseWidth:
+// $navbarCollapseDesktopWidth:
+
+

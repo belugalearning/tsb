@@ -1,0 +1,87 @@
+
+#push {
+  height: 50px;
+}
+
+
+#footer {
+  height: 30px;
+}
+
+#wrap {
+       min-height: 100%;
+       height: auto !important;
+       height: 100%;
+       /* Negative indent footer by it's height */
+       margin: 0 auto -30px;
+}
+
+#pane-container{
+  padding-top: 100px;
+}
+
+.main-header {
+  .navbar-inner {
+    background-color: $color-dark-grey;
+    border: none;
+    .brand {
+      padding: 10px 0 0 0;
+      margin-left: 0;
+    }
+    .nav {
+      padding-left: 15px;
+    }
+    .insight, .admin {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .insight {
+      &.active {
+        color: $color-header-selected;
+      }
+      &:hover {
+        color: $color-beluga-orange;
+      }
+    }
+    .admin {
+      &.active {
+        color: $color-header-selected;
+      }
+      &:hover {
+        color: $color-beluga-orange;
+      }
+    }
+    .user-actions {
+      a {
+        color: #fff;
+        padding-left: 5px;
+      }
+    }
+  }
+  .subnav {
+    background-color: $color-dark-grey-secondary;
+    height: 45px;
+    line-height: 45px;
+    a {
+      color: $color-text-unselected;
+      &.active {
+        color: #fff;
+      }
+    }
+    ul {
+      display: block;
+      list-style: none;
+      float: left;
+      margin: 0;
+      li {
+        padding: 0 28px 0 0;
+        line-height: 45px;
+        float: left;
+      }
+    }
+  }
+}
+
+#footer {
+
+}
