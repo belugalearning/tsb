@@ -1,7 +1,9 @@
 {
   "name": "designsuperbuild-boilerplate",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "grunt-contrib-watch": "~0.4.4"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-coffee": "~0.6.0",

@@ -1,0 +1,44 @@
+<!-- initial state for both
+  1) "Divide 6 into y equal groups"
+  2) "Divide 6 into equal groups of y"
+-->
+<set>
+  <set>
+    <ci>item0</ci>
+    <ci>item1</ci>
+    <ci>item2</ci>
+    <ci>item3</ci>
+    <ci>item4</ci>
+    <ci>item5</ci>
+  </set>
+</set>
+
+<!-- Example Solution State: question-type (1), x=6, y=2; "Divide 6 into 2 equal groups" -->
+<set>
+  <set>
+    <ci>item4</ci>
+    <ci>item2</ci>
+    <ci>item0</ci>
+  </set>
+  <set>
+    <ci>item1</ci>
+    <ci>item3</ci>
+    <ci>item5</ci>
+  </set>
+</set>
+
+<!-- Example Solution State: question-type (2), x=6, y=2; "Divide 6 into equal groups of 2" -->
+<set>
+  <set>
+    <ci>item2</ci>
+    <ci>item0</ci>
+  </set>
+  <set>
+    <ci>item3</ci>
+    <ci>item5</ci>
+  </set>
+  <set>
+    <ci>item4</ci>
+    <ci>item1</ci>
+  </set>
+</set>
