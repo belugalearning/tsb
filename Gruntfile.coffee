@@ -109,6 +109,11 @@ module.exports = (grunt) ->
         relativeSrc: '../app/components'
         options: 
           type: 'dir'
+      tools: 
+        dest: '<%= appDirs.build %>/tools'
+        relativeSrc: '../app/tools'
+        options: 
+          type: 'dir'
 
     watch:
       coffee:
@@ -175,6 +180,7 @@ module.exports = (grunt) ->
     'clean:build'
     'compass:server',
     'symlink:components'
+    'symlink:tools'
     'coffee:main'
     'copy:main'
     'coffee:tests'
@@ -183,10 +189,22 @@ module.exports = (grunt) ->
     'watch'
   ])
 
+  grunt.registerTask('dev', [
+    'clean:build'
+    'compass:server',
+    'symlink:components'
+    'symlink:tools'
+    'coffee:main'
+    'copy:main'
+    'coffee:tests'
+    'copy:tests'
+  ])
+
   grunt.registerTask('dist', [
     'clean:build'
     'clean:dist'
     'symlink:components'
+    'symlink:tools'
     'coffee:main'
     'copy:main'
     'coffee:tests'

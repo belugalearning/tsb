@@ -22,9 +22,17 @@ define (require) ->
       console.log "show bundle"
       console.log @bundle
       @$el.append(@bundleTemplate(@bundle.attributes))
+
+      DOMContentLoaded_event = document.createEvent("Event")
+      DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true)
+      window.document.dispatchEvent(DOMContentLoaded_event)
     
     wire: =>
       @bundle.fetch({reset: true})
     
     cleanup: =>
+      console.log "cleanup cocos2d"
+      window.cocos2dApp = null
+      window.cc = null
+      window.myApp = null
       @remove()
