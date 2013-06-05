@@ -1,10 +1,10 @@
 define (require) ->
 
   Backbone = require 'backbone'
-  BundleItemTemplate = require 'text!templates/items/bundle_tr.html'
+  SetItemTemplate = require 'text!templates/items/set_tr.html'
 
-  class BundleList extends Backbone.View
-    template: _.template(BundleItemTemplate)
+  class SetList extends Backbone.View
+    template: _.template(SetItemTemplate)
 
     events:
       "click a": "navigate"

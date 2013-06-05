@@ -3,6 +3,7 @@ define (require) ->
   Backbone = require 'backbone'
   BlankSubnavTemplate = require 'text!templates/modules/subnav_blank.html'
   BundleSubnavTemplate = require 'text!templates/modules/subnav_bundle.html'
+  SetSubnavTemplate = require 'text!templates/modules/subnav_set.html'
 
   class Subnav extends Backbone.View
     template: _.template(BlankSubnavTemplate)
@@ -27,6 +28,8 @@ define (require) ->
         @template = _.template(BlankSubnavTemplate)
       else if @current == "bundle"
         @template = _.template(BundleSubnavTemplate)
+      else if @current == "set"
+        @template = _.template(SetSubnavTemplate)
       else
         @template = _.template(BlankSubnavTemplate)
       @render()

@@ -1,9 +1,10 @@
 define (require) ->
 
   Backbone = require 'backbone'
+  PreviewView = require 'views/modules/preview'
   QuestionTemplate = require 'text!templates/questions/test_question.html'
   QuestionModel = require 'models/questions/test_question'
-  Bundle = require 'services/bundle/index.js'
+  Bundle = require 'services/bundle/index'
 
   class TestQuestion extends Backbone.View
     template: _.template(QuestionTemplate)
@@ -28,6 +29,8 @@ define (require) ->
     preview: (e) =>
       e.preventDefault()
       form_data = @getFormData()
+      @preview = new PreviewView({ el: ".preview-area", form_data: form_data }).render()
+      $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
       console.log form_data
       # make preview
 

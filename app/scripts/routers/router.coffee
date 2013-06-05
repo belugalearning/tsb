@@ -10,6 +10,7 @@ define (require) ->
       'bundle/new'      : 'showBundleNew'
       'bundle/view/:id' : 'showBundleView'
       'set'             : 'showSet'
+      'set/new'         : 'showSetNew'
       'analytics'       : 'showAnalytics'
       'account'         : 'showAccount'
 
@@ -28,6 +29,9 @@ define (require) ->
 
     showBundleNew: =>
       @app.setCurrentPane('bundle_new')
+
+    showSetNew: =>
+      @app.setCurrentPane('set_new')
     
     showSet: =>
       @app.setCurrentPane('set')
