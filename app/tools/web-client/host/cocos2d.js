@@ -37,6 +37,9 @@
         engineDir:'/tools/web-client/cocos2d/',
         //SingleEngineFile:'',
         appFiles:[
+            '/tools/shared-resources/lib/sax.js',
+            '/tools/shared-resources/lib/xmldoc.js',            
+
             '/tools/web-client/host/src/resource.js',
             '/tools/host-helpers/shared-qlayer.js',
 

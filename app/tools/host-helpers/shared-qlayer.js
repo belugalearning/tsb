@@ -11,7 +11,8 @@ var QLayer = cc.Layer.extend({
  
         var size = cc.Director.getInstance().getWinSize();
 
-        this.titleLabel = cc.LabelTTF.create("Empty Tool!", "Helvetica", 38);
+        //don't write a title for now
+        this.titleLabel = cc.LabelTTF.create("...", "Helvetica", 38);
         this.titleLabel.setPosition(cc.p(size.width / 2, size.height - 40));
         this.addChild(this.titleLabel, 5);
 

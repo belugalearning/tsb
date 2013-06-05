@@ -66,111 +66,99 @@ var ToolLayer = cc.Layer.extend({
     },
 
     setupTool:function(dt){
-        // cc.log("setting up tool");
-// 
 
-        var newc=emapData.a * emapData.b;
-        var oldc=this.lastcount * this.lastb;
+        //clean up old objects
+        for(var i=0; i<this.allpsprites.length; i++)
+        {
+            var ps=this.allpsprites[i];
+            this.space.removeShape(ps._body.shapeList[0]);
+            this.space.removeBody(ps._body);
 
-        cc.log("newc: " + newc + "  oldc: " + oldc);
+            this.objlayer.removeChild(ps, false);
+        }
 
-        // if(newc<oldc)
-        // {
-        //     cc.log("removing objects");
-        //     for(var r=0; r<(oldc-newc); r++)
-        //     {
-        //         var ps=this.allpsprites[0];
-        //         this.space.removeConstraint(ps.spring);
-        //         this.space.removeConstraint(ps.slide);
+        //only while we're removing everything from the array, else we could just pop the one we don't
+        this.allpsprites=new Array();
 
+        //iterate over tool state data
+
+        // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
+        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
+        
+        console.log(doc);
+        console.log(doc.children);
+
+        for(var l=0; l<doc.children.length; l++) {
+            var child=doc.children[l];
+        // doc.eachChild(function(child, index, array) {
+            console.log("building set")
+            asprites=new Array();
+         
+            for(var j=0; j<child.children.length; j++) {
+            // child.eachChild(function(child, index, array) {
+             
+                console.log("building object");
+
+                var x=Math.random()*924 + 50;
+                var y=Math.random()*569 + 50;
+
+                var s=this.createPhysicsSprite(cc.p(x,y));
+
+                this.objlayer.addChild(s, 1);   
+
+                // cc.log(" allps is " + this.allpsprites.length);
+                this.allpsprites.push(s);    
+                asprites.push(s);     
+            }
+
+            //attach all the bodies to eachother
+            for(var i=0; i<asprites.length; i++)
+            {
+                var ps1=asprites[i];
                 
-        //         this.space.removeShape(ps._body.shapeList[0]);
-        //         this.space.removeBody(ps._body);
+                // for(var j=i; j<2; j++)
+                // {
+                var k=(i+1)%(asprites.length);
 
+                cc.log(i + " .... " + k);
+                var ps2=asprites[k];
 
-        //         this.objlayer.removeChild(ps, false);
-        //         this.allpsprites.pop(ps);
-        //     }
-        // }
-        // else
-        // {
-
-
-            for(var i=0; i<this.allpsprites.length; i++)
-            {
-                var ps=this.allpsprites[i];
-                this.space.removeShape(ps._body.shapeList[0]);
-                this.space.removeBody(ps._body);
-
-                this.objlayer.removeChild(ps, false);
-            }
-
-            //only while we're removing everything from the array, else we could just pop the one we don't
-            this.allpsprites=new Array();
-
-            for(b=0; b<emapData.b; b++)
-            {
-                asprites=new Array();
-                for(i=0; i<emapData.a; i++)
+                if(ps1!=ps2 && ps1!=null && ps2!=null)
                 {
-                    var x=Math.random()*924 + 50;
-                    var y=Math.random()*569 + 50;
+                    var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 200,300);
+                    this.space.addConstraint(slide);
 
-                    var s=this.createPhysicsSprite(cc.p(x,y));
+                    var spring=new cp.DampedSpring(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 0, 3, 0.05);
+                    this.space.addConstraint(spring);
 
-                    this.objlayer.addChild(s, 1);   
-
-                    // cc.log(" allps is " + this.allpsprites.length);
-                    this.allpsprites.push(s);    
-                    asprites.push(s);     
+                    ps1.slide=slide;
+                    ps1.spring=spring;
+                    ps1.otherps=ps2;
                 }
-
-                //attach all the bodies to eachother
-                for(var i=0; i<asprites.length; i++)
-                {
-                    var ps1=asprites[i];
-                    
-                    // for(var j=i; j<2; j++)
-                    // {
-                    var k=(i+1)%(asprites.length);
-
-                    cc.log(i + " .... " + k);
-                    var ps2=asprites[k];
-
-                    if(ps1!=ps2 && ps1!=null && ps2!=null)
-                    {
-                        var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 200,300);
-                        this.space.addConstraint(slide);
-
-                        var spring=new cp.DampedSpring(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 0, 3, 0.05);
-                        this.space.addConstraint(spring);
-
-                        ps1.slide=slide;
-                        ps1.spring=spring;
-                        ps1.otherps=ps2;
-                    }
-                    // }
-                    
-                }
-
-            //close b loop
+    
             }
+            
+        }
 
-        //close else to removing objects
-        // }
 
-        this.lastcount=emapData.a;
-        this.lastb=emapData.b;
+        // var newc=emapData.a * emapData.b;
+        // var oldc=this.lastcount * this.lastb;
+
+        // cc.log("newc: " + newc + "  oldc: " + oldc);
+        
+        // this.lastcount=emapData.a;
+        // this.lastb=emapData.b;
     },
 
     update:function (dt) {
 
         this.space.step( dt );
 
-        if(this.lastcount!=emapData.a || this.lastb!=emapData.b)
-        {
-            this.setupTool();
-        }
+        // if(this.lastcount!=emapData.a || this.lastb!=emapData.b)
+        // {
+        //     this.setupTool();
+        // }
 
         //draw stuff
         this.drawnode.clear();
