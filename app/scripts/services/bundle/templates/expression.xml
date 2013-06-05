@@ -1,0 +1,32 @@
+<apply>
+  <and/>
+  <apply>
+    <eq/>
+    <apply>
+      <card/>
+      <ci>math-state</ci>
+    </apply>
+    <ph id="num-groups"/>
+  </apply>
+  <apply>
+    <forall/>
+    <bvar>
+      <ci>set</ci>
+    </bvar>
+    <condition>
+      <apply>
+        <in/>
+        <ci>set</ci>
+        <ci>math-state</ci>
+      </apply>
+    </condition>
+    <apply>
+      <eq/>
+      <apply>
+        <card />
+        <ci>set</ci>
+      </apply>
+      <ph id="group-size"/>
+    </apply>
+  </apply>
+</apply>
