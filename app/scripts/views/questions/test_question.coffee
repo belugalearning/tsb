@@ -3,6 +3,7 @@ define (require) ->
   Backbone = require 'backbone'
   QuestionTemplate = require 'text!templates/questions/test_question.html'
   QuestionModel = require 'models/questions/test_question'
+  Bundle = require 'services/bundle/index.js'
 
   class TestQuestion extends Backbone.View
     template: _.template(QuestionTemplate)
@@ -27,23 +28,34 @@ define (require) ->
     preview: (e) =>
       e.preventDefault()
       form_data = @getFormData()
+      console.log form_data
       # make preview
 
     getFormData: =>
-      form_data = 
-        equation_x_from:  @getFormVal('.x-from')
-        equation_x_to:    @getFormVal('.x-to')
-        equation_y_vals:  @getCheckboxes('.equation-y-checkboxes')
-        solution_output:  @getFormVal('.solution-output')
+      form_data =
+        xValues: @getIntRangeVals('.x-from', '.x-to')
+        yValues:  @getCheckboxes('.equation-y-checkboxes')
+        questionType:  @getFormVal('.question-type')
         tool:             @getFormVal('.tool')
-        bundle_output:    @getFormVal('.bundle-output')
+        numQuestions:    @getFormVal('.num-questions')
 
     getFormVal: (selector) =>
       @$el.find(selector).val()
 
+    getIntRangeVals: (fromSelector, toSelector) =>
+      from = parseInt($(fromSelector).val(), 10)
+      to = parseInt($(toSelector).val(), 10)
+      $(fromSelector)
+        .children('option')
+        .toArray()
+        .map (opt) =>
+          parseInt($(opt).prop('value'), 10)
+        .filter (val) =>
+          from <= val && val <= to
+    
     getCheckboxes: (selector) =>
-      allVals = [];
-      $(selector + ' :checked').each -> 
+      allVals = []
+      $(selector + ' :checked').each ->
         allVals.push($(this).val())
       allVals
 
