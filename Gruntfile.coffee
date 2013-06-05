@@ -189,7 +189,7 @@ module.exports = (grunt) ->
     'watch'
   ])
 
-  grunt.registerTask('dev', [
+  grunt.registerTask('build', [
     'clean:build'
     'compass:server',
     'symlink:components'
