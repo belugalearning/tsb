@@ -23,16 +23,18 @@ define (require) ->
       console.log @bundle
       @$el.append(@bundleTemplate(@bundle.attributes))
 
-      DOMContentLoaded_event = document.createEvent("Event")
-      DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true)
-      window.document.dispatchEvent(DOMContentLoaded_event)
-    
+      if cc?
+        console.log "got director already"
+        cc.Director.getInstance().replaceScene(ToolLayer.scene());
+      else
+        DOMContentLoaded_event = document.createEvent("Event")
+        DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true)
+        window.document.dispatchEvent(DOMContentLoaded_event)
+
     wire: =>
       @bundle.fetch({reset: true})
     
     cleanup: =>
-      console.log "cleanup cocos2d"
-      window.cocos2dApp = null
-      window.cc = null
-      window.myApp = null
+      console.log "cleanup cocos2d -- nothing required, will replace scene later"
+    
       @remove()
