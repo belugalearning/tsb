@@ -8,6 +8,7 @@ var contentService
   ContentService.prototype.setBundle = function(bundle) {
     this.bundle = bundle
     this.currentQuestionIx = -1
+    if (this.bundle) this.nextQuestion()
   }
 
   ContentService.prototype.nextQuestion = function() {
