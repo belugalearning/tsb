@@ -85,6 +85,7 @@ var ToolLayer = cc.Layer.extend({
 
         //only while we're removing everything from the array, else we could just pop the one we don't
         this.allpsprites=new Array();
+        this.allobjects=new Array();
 
         //iterate over tool state data
 
