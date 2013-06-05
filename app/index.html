@@ -22,6 +22,8 @@
 
   <div id="footer">
     <div class="container">
+      <canvas id="gameCanvas" width="800" height="450"></canvas>
+
       <p class="muted credit">Footer content <a href="#">Link to something</a>.</p>
     </div>
   </div>
@@ -36,5 +38,14 @@
   <!-- build:js scripts/main.js -->
   <script data-main="/scripts/main" src="/components/requirejs/require.js"></script>
   <!-- endbuild -->
+
+
+  <script src="/tools/web-client/host/cocos2d.js"></script>
+  <script src="/tools/shared-resources/exprmap-defaults.js"></script>
+
+  <!-- USE THIS IF YOU WANT TO SKIP THE EXPR MAP GUI, IT'LL JUST COPY DATA FROM DEFAULTS, LIKE IOS CLIENT CURRENTLY DOES ... ALSO COMMENT OUT THE dat.gui AND exprMapGui SCRIPTS BELOW -->
+  <script src="/tools/web-client/host/emapCopyDefaults.js"></script>
+
+
 </body>
 </html>
