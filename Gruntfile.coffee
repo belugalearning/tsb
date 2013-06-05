@@ -75,7 +75,7 @@ module.exports = (grunt) ->
           dest: '<%= appDirs.build %>'
           src: [
             './*.html',
-            'scripts/**/*.{js,html}',
+            'scripts/**/*.{js,html,xml}',
             'styles/**/*.css',
             'images/**/*.{png,gif,jpg}'
           ]
@@ -134,7 +134,7 @@ module.exports = (grunt) ->
       copy:
         files: [
           '<%= appDirs.app %>/*.html',
-          '<%= appDirs.app %>/scripts/**/*.{js,html}',
+          '<%= appDirs.app %>/scripts/**/*.{js,html,xml}',
           '<%= appDirs.app %>/styles/**/*.css',
           '<%= appDirs.app %>/images/**/*.{gif,jpg,png}',
         ]

@@ -23,24 +23,26 @@ define (require) ->
     submit: (e) =>
       e.preventDefault()
       # TODO: get data, populate model, save
-      form_data = @getFormData()
-      question = new QuestionModel( form_data )
+      #question = new QuestionModel( form_data )
 
     preview: (e) =>
       e.preventDefault()
-      form_data = @getFormData()
-      @preview = new PreviewView({ el: ".preview-area", form_data: form_data }).render()
+      bundleOpts = @getFormData()
+      contentService.setBundle(new Bundle(bundleOpts))
+      @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
-      console.log form_data
       # make preview
 
     getFormData: =>
       form_data =
-        xValues: @getIntRangeVals('.x-from', '.x-to')
-        yValues:  @getCheckboxes('.equation-y-checkboxes')
-        questionType:  @getFormVal('.question-type')
-        tool:             @getFormVal('.tool')
-        numQuestions:    @getFormVal('.num-questions')
+        questionType: @getFormVal('.question-type')
+        tool:         @getFormVal('.tool')
+        vars:
+          x:
+            values: @getIntRangeVals('.x-from', '.x-to')
+          y:
+            values: @getCheckboxIntVals('.equation-y-checkboxes')
+        numQuestions: @getFormVal('.num-questions')
 
     getFormVal: (selector) =>
       @$el.find(selector).val()
@@ -56,9 +58,8 @@ define (require) ->
         .filter (val) =>
           from <= val && val <= to
     
-    getCheckboxes: (selector) =>
+    getCheckboxIntVals: (selector) =>
       allVals = []
       $(selector + ' :checked').each ->
-        allVals.push($(this).val())
+        allVals.push(parseInt($(this).val(), 10))
       allVals
-
