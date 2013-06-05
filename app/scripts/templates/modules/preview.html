@@ -1,7 +1,9 @@
 <h3>Preview</h3>
 
-<p>xValues: <%= xValues %></p>
-<p>yValues: <%= yValues %></p>
-<p>questionType: <%= questionType %></p>
-<p>tool: <%= tool %></p>
-<p>numQuestions: <%= numQuestions %></p>
+<canvas id="gameCanvas" width="800" height="450"></canvas>
+
+<script src="/tools/web-client/host/cocos2d.js"></script>
+<script src="/tools/shared-resources/exprmap-defaults.js"></script>
+
+<!-- USE THIS IF YOU WANT TO SKIP THE EXPR MAP GUI, IT'LL JUST COPY DATA FROM DEFAULTS, LIKE IOS CLIENT CURRENTLY DOES ... ALSO COMMENT OUT THE dat.gui AND exprMapGui SCRIPTS BELOW -->
+<script src="/tools/web-client/host/emapCopyDefaults.js"></script>

@@ -23,14 +23,13 @@ define (require) ->
     submit: (e) =>
       e.preventDefault()
       # TODO: get data, populate model, save
-      form_data = @getFormData()
-      question = new QuestionModel( form_data )
+      #question = new QuestionModel( form_data )
 
     preview: (e) =>
       e.preventDefault()
       bundleOpts = @getFormData()
       contentService.setBundle(new Bundle(bundleOpts))
-      @preview = new PreviewView({ el: ".preview-area", form_data: form_data }).render()
+      @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
       # make preview
 
