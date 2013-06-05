@@ -13,6 +13,8 @@ var ToolLayer = cc.Layer.extend({
     touchSprite:null,
     touching:false,
     drawnode:null,
+    commitBtn:null,
+    allobjects:new Array(),
 
     init:function () {
 
@@ -40,6 +42,10 @@ var ToolLayer = cc.Layer.extend({
         this.addChild(this.drawnode, 0);
 
         this.space = new cp.Space();
+
+        this.commitBtn=cc.Sprite.create(s_imagePath+"commit.png");
+        this.commitBtn.setPosition(cc.p(size.width-60, size.height-35));
+        this.addChild(this.commitBtn);
 
         var space = this.space ;
         var staticBody = space.staticBody;
@@ -91,12 +97,16 @@ var ToolLayer = cc.Layer.extend({
 
         for(var l=0; l<doc.children.length; l++) {
             var child=doc.children[l];
+            var thisset=new Array();
+            this.allobjects.push(thisset);
+
         // doc.eachChild(function(child, index, array) {
             console.log("building set")
             asprites=new Array();
          
             for(var j=0; j<child.children.length; j++) {
             // child.eachChild(function(child, index, array) {
+                var jchild=child.children[j];
              
                 console.log("building object");
 
@@ -105,11 +115,15 @@ var ToolLayer = cc.Layer.extend({
 
                 var s=this.createPhysicsSprite(cc.p(x,y));
 
+                //add the text value of the original item
+                s.sourceTag=jchild.val;
+
                 this.objlayer.addChild(s, 1);   
 
                 // cc.log(" allps is " + this.allpsprites.length);
                 this.allpsprites.push(s);    
                 asprites.push(s);     
+                thisset.push(s);
             }
 
             //attach all the bodies to eachother
@@ -149,6 +163,26 @@ var ToolLayer = cc.Layer.extend({
         
         // this.lastcount=emapData.a;
         // this.lastb=emapData.b;
+    },
+
+    commitAnswer:function() {
+
+        var xout="<set>";
+        for(var i=0; i<this.allobjects.length; i++)
+        {
+            xout+="<set>";
+            var thisset=this.allobjects[i];
+            for(var j=0; j<thisset.length; j++)
+            {
+                var thiss=thisset[j];
+                xout+="<ci>" + thiss.sourceTag + "</ci>";
+            }
+            xout+="</set>";
+        }        
+        xout+="</set>";
+        console.log(xout);
+
+        //do something with this -- xout is this xml reprensentation of the tool state
     },
 
     update:function (dt) {
@@ -202,21 +236,30 @@ var ToolLayer = cc.Layer.extend({
     onTouchesBegan: function(touches, event) {
         // cc.log("touching at " + touches[0].getLocation().x + ", " + touches[0].getLocation().y);
 
-        this.touching=true;
-        this.touchSprite=null;
-        for(var i=0; i<this.allpsprites.length; i++)
+        if (cc.rectContainsPoint(this.commitBtn.getBoundingBox(), touches[0].getLocation()))
         {
-            var ps=this.allpsprites[i];
-            if(cc.rectContainsPoint(ps.getBoundingBox(), touches[0].getLocation()))
-            {
-                this.touchSprite=ps;
-                break;
-            }
+            console.log("commit pressed");
+            this.commitAnswer();
         }
 
-        if(this.touchSprite!=null)
+        else
         {
-            cc.log("touched " + ps);
+            this.touching=true;
+            this.touchSprite=null;
+            for(var i=0; i<this.allpsprites.length; i++)
+            {
+                var ps=this.allpsprites[i];
+                if(cc.rectContainsPoint(ps.getBoundingBox(), touches[0].getLocation()))
+                {
+                    this.touchSprite=ps;
+                    break;
+                }
+            }
+
+            if(this.touchSprite!=null)
+            {
+                cc.log("touched " + ps);
+            }
         }
     },
 
