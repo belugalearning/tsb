@@ -1,5 +1,6 @@
 [ 
   { 
+    "_id": 1001,
     "name": "Test Set 1",
     "bundles": 
       [ 
@@ -26,6 +27,7 @@
       ]
   },
   { 
+    "_id": 1001,
     "name": "Test Set 2",
     "bundles": 
       [ 

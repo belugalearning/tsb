@@ -10,7 +10,6 @@ define (require) ->
 
     initialize: ->
       @collection = new BundleCollection()
-      console.log @listview
 
     render: =>
       tmpl = @template()
