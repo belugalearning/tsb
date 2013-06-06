@@ -94,11 +94,13 @@ var ToolLayer = cc.Layer.extend({
         //iterate over tool state data
 
         // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
         // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
         
+        var question = contentService.nextQuestion()
+        var doc = new XmlDocument(question.initialState)
         //update question text
-        this.titleLabel.setString("insert title here");
+        this.titleLabel.setString(question.text)
 
         console.log(doc);
         console.log(doc.children);
