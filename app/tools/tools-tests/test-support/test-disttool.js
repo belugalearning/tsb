@@ -47,6 +47,10 @@ var ToolLayer = cc.Layer.extend({
         this.commitBtn.setPosition(cc.p(size.width-60, size.height-35));
         this.addChild(this.commitBtn);
 
+        this.titleLabel = cc.LabelTTF.create("...", "Helvetica", 38);
+        this.titleLabel.setPosition(cc.p(size.width / 2, size.height - 50));
+        this.addChild(this.titleLabel, 5);
+
         var space = this.space ;
         var staticBody = space.staticBody;
 
@@ -90,9 +94,14 @@ var ToolLayer = cc.Layer.extend({
         //iterate over tool state data
 
         // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
         // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
         
+        var question = contentService.nextQuestion()
+        var doc = new XmlDocument(question.initialState)
+        //update question text
+        this.titleLabel.setString(question.text)
+
         console.log(doc);
         console.log(doc.children);
 
@@ -119,6 +128,9 @@ var ToolLayer = cc.Layer.extend({
                 //add the text value of the original item
                 s.sourceTag=jchild.val;
 
+                //reference to set
+                s.parentSet=thisset;
+
                 this.objlayer.addChild(s, 1);   
 
                 // cc.log(" allps is " + this.allpsprites.length);
@@ -141,15 +153,7 @@ var ToolLayer = cc.Layer.extend({
 
                 if(ps1!=ps2 && ps1!=null && ps2!=null)
                 {
-                    var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 200,300);
-                    this.space.addConstraint(slide);
-
-                    var spring=new cp.DampedSpring(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 0, 3, 0.05);
-                    this.space.addConstraint(spring);
-
-                    ps1.slide=slide;
-                    ps1.spring=spring;
-                    ps1.otherps=ps2;
+                    this.bondObjects(ps1, ps2);
                 }
     
             }
@@ -166,24 +170,32 @@ var ToolLayer = cc.Layer.extend({
         // this.lastb=emapData.b;
     },
 
+    bondObjects:function(ps1, ps2)
+    {
+        var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 100,200);
+        this.space.addConstraint(slide);
+
+        var spring=new cp.DampedSpring(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 0, 3, 0.05);
+        this.space.addConstraint(spring);
+
+        ps1.slide=slide;
+        ps1.spring=spring;
+        ps1.otherps=ps2;
+        ps2.linkingps=ps1;
+    },
+
     commitAnswer:function() {
+      var ans =
+        '<set>' +
+        this.allobjects.map(function(grp) { return (
+          '<set>' + 
+          grp.map(function(item) { return '<ci>' + item.sourceTag + '</ci>' }).join('') +
+          '</set>')
+        }).join('') +
+        '</set>'
 
-        var xout="<set>";
-        for(var i=0; i<this.allobjects.length; i++)
-        {
-            xout+="<set>";
-            var thisset=this.allobjects[i];
-            for(var j=0; j<thisset.length; j++)
-            {
-                var thiss=thisset[j];
-                xout+="<ci>" + thiss.sourceTag + "</ci>";
-            }
-            xout+="</set>";
-        }        
-        xout+="</set>";
-        console.log(xout);
-
-        //do something with this -- xout is this xml reprensentation of the tool state
+      console.log('ans:', ans)
+      this.setupTool()
     },
 
     update:function (dt) {
@@ -195,6 +207,19 @@ var ToolLayer = cc.Layer.extend({
         //     this.setupTool();
         // }
 
+
+        //monitor held object connections
+        if(this.touchSprite!=null && this.touchSprite.otherps!=null)
+        {
+            this.testBrokenBond(this.touchSprite);
+            if(this.touchSprite.linkingps!=null) this.testBrokenBond(this.touchSprite.linkingps);
+        }
+
+        if(this.touchSprite!=null && this.touchSprite.otherps==null && this.touchSprite.linkingps==null)
+        {
+            this.testNewBond();
+        }
+
         //draw stuff
         this.drawnode.clear();
 
@@ -202,9 +227,45 @@ var ToolLayer = cc.Layer.extend({
         {
             var ps1=this.allpsprites[i];
 
-            this.drawnode.drawSegment(ps1.getPosition(), ps1.otherps.getPosition(), 5, cc.c4b(255, 255, 255, 1));
+            if(ps1.otherps!=null)
+                this.drawnode.drawSegment(ps1.getPosition(), ps1.otherps.getPosition(), 3, cc.c4b(255, 255, 255, 1));
         }
-        
+    },
+
+    testBrokenBond:function(o1){
+        var o2=o1.otherps;
+        var d=Math.abs(cc.pDistance(o1.getPosition(), o2.getPosition()));
+        console.log(d);
+
+        if(d>220)
+        {
+            //break this object from set
+            o1.parentSet.pop(o1);
+            o1.parentSet=null;
+
+            //create a new set for this object
+            newset=new Array();
+            newset.push(o1);
+
+            if(o1.linkingps!=null) newset.push(o1.otherps)
+            else newset.push(o1)
+
+            this.allobjects.push(newset);
+
+
+            this.space.removeConstraint(o1.spring);
+            this.space.removeConstraint(o1.slide);
+            o1.otherps.linkingps=null;
+            o1.otherps=null;
+            
+        }
+    },
+
+    testNewBond:function(o1){
+        //iterate over all other sprites and get closest
+
+        //if distance < threshold, keep it as bonding object
+
 
     },
 
@@ -279,10 +340,10 @@ var ToolLayer = cc.Layer.extend({
 
 
     createPhysicsSprite: function( pos ) {
-        var body = new cp.Body(1, cp.momentForBox(1, 103, 103) );
+        var body = new cp.Body(1, cp.momentForBox(1, 73, 73) );
         body.setPos( pos );
         this.space.addBody( body );
-        var shape = new cp.BoxShape( body, 103, 103);
+        var shape = new cp.BoxShape( body, 73, 73);
         shape.setElasticity( 0.5 );
         shape.setFriction( 0.5 );
         this.space.addShape( shape );

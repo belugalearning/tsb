@@ -16,11 +16,26 @@ define(function(require) {
       .find('ph#group-size')
       .replaceWith(opts.questionType == 'split_x_y_eq_grps' ? $(xDivYTemplate) : $(yTemplate))
       [0]
+  }
 
-    this.questions = []
-    for (var i = 0; i < this.numQuestions; ++i) {
-      this.questions.push(new Question(this))
-    }
+  Bundle.prototype.evalAns = function(ans, question) {
+    var reqNumGrps = this.questionType == 'split_x_y_eq_grps'
+      ? question.vars.y
+      : question.vars.x / question.vars.y
+
+    var reqGrpSize = this.questionType == 'split_x_y_eq_grps'
+      ? question.vars.x / question.vars.y
+      : question.vars.y
+
+    var $groups = $(ans).children('set')
+
+    return (
+      reqNumGrps == $groups.length &&
+      reqNumGrps == $groups.filter(function(i, grp) { return $(grp).children().length == reqGrpSize }).length)
+  }
+
+  Bundle.prototype.createQuestion = function() {
+    return new Question(this)
   }
 
   function Question(bundle) {
@@ -30,7 +45,7 @@ define(function(require) {
     var yVals = bundle.vars.y.values
     this.vars.y = yVals[ Math.floor(Math.random() * yVals.length) ]
 
-    var xVals = bundle.vars.x.values.filter(function(v) { return v % self.vars.y == 0 })
+    var xVals = bundle.vars.x.values.filter(function(v) { return v > self.vars.y && v % self.vars.y == 0 })
     this.vars.x = xVals[ Math.floor(Math.random() * xVals.length) ]
 
     this.text =
