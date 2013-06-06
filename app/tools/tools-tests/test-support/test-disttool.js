@@ -15,7 +15,7 @@ var ToolLayer = cc.Layer.extend({
     drawnode:null,
     commitBtn:null,
     allobjects:new Array(),
-    showDebug:true,
+    showDebug:false,
 
     init:function () {
 
