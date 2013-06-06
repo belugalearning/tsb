@@ -23,6 +23,22 @@ define(function(require) {
     }
   }
 
+  Bundle.prototype.evalAns = function(ans, question) {
+    var reqNumGrps = this.questionType == 'split_x_y_eq_grps'
+      ? question.vars.y
+      : question.vars.x / question.vars.y
+
+    var reqGrpSize = this.questionType == 'split_x_y_eq_grps'
+      ? question.vars.x / question.vars.y
+      : question.vars.y
+
+    var $groups = $(ans).children('set')
+
+    return (
+      reqNumGrps == $groups.length &&
+      reqNumGrps == $groups.filter(function(i, grp) { return $(grp).children().length == reqGrpSize }).length)
+  }
+
   function Question(bundle) {
     var self = this
     this.vars = {}
