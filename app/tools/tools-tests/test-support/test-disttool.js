@@ -15,7 +15,7 @@ var ToolLayer = cc.Layer.extend({
     drawnode:null,
     commitBtn:null,
     allobjects:new Array(),
-    showDebug:false,
+    showDebug:true,
 
     init:function () {
 
@@ -102,15 +102,20 @@ var ToolLayer = cc.Layer.extend({
 
         //iterate over tool state data
 
-        // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
-        // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
-        
-        var question = contentService.nextQuestion()
-        var doc = new XmlDocument(question.initialState)
+        if(typeof contentService != 'undefined')
+        {
+            var question = contentService.nextQuestion()
+            var doc = new XmlDocument(question.initialState)
 
-        //update question text
-        this.titleLabel.setString(question.text)
+            //update question text
+            this.titleLabel.setString(question.text)            
+
+        }
+        else {
+            // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
+            var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+            // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
+        }
 
         console.log(doc);
         console.log(doc.children);
@@ -272,24 +277,29 @@ var ToolLayer = cc.Layer.extend({
 
             this.breakForwardBondOn(o1);
 
-            if(origfwd.otherps==null)
-            {
-                //break this object from set
-                origfwd.parentSet.pop(origfwd);
-                origfwd.parentSet=null;
+            this.testAndCreateSetFor(origfwd);
+            this.testAndCreateSetFor(o1);
+        }
+    },
 
-                //create a new set for this object
-                newset=new Array();
-                newset.push(origfwd);
+    testAndCreateSetFor:function(obj){
+        console.log("testing set removal from " + obj.sourceTag + " with set length " + obj.parentSet.length);
+        if(obj.otherps==null && obj.linkingps==null && obj.parentSet.length!=1)
+        {
+            //break this object from set
+            obj.parentSet.pop(obj);
+            obj.parentSet=null;
 
-                origfwd.parentSet=newset;
+            //create a new set for this object
+            newset=new Array();
+            newset.push(obj);
 
-                // if(origfwd.linkingps!=null) newset.push(origfwd.otherps)
-                // else newset.push(origfwd)
+            obj.parentSet=newset;
 
-                this.allobjects.push(newset);
-            }
-            
+            // if(obj.linkingps!=null) newset.push(obj.otherps)
+            // else newset.push(obj)
+
+            this.allobjects.push(newset);
         }
     },
 
@@ -324,19 +334,19 @@ var ToolLayer = cc.Layer.extend({
         // console.log(besto + " (at distance " + mind + ")");
 
         //if distance < threshold, keep it as bonding object, tint that object
-        if(mind<220 && this.bondingObject!=besto)
+        if(mind<100 && this.bondingObject!=besto)
         {
             this.unsetBondingObject();
 
             this.bondingObject=besto;
             besto.setColor(cc.c4b(200,255,200,255));
         }
-        else if(this.bondingObject!=null)
-        {
-            //reset any highlighting and set object
-            this.unsetBondingObject();
-        }
-        //else the object is already set to this object
+        // else if(this.bondingObject!=null && best!=null)
+        // {
+        //     //reset any highlighting and set object
+        //     this.unsetBondingObject();
+        // }
+        // //else the object is already set to this object
 
     },
 
@@ -423,6 +433,9 @@ var ToolLayer = cc.Layer.extend({
         //if there's a bonding object, bond to it
         if(this.bondingObject!=null)
         {
+            console.log("going to bond to " + this.bondingObject.sourceTag + " with otherps " + this.bondingObject.otherps + " with linkingps " + this.bondingObject.linkingps);
+
+
             if(this.bondingObject.otherps==null)
                 this.bondObjects(this.bondingObject, this.touchSprite);
 
@@ -454,6 +467,7 @@ var ToolLayer = cc.Layer.extend({
 
         this.touching=false;
         this.touchSprite=null;
+        this.bondingObject=null;
 
         console.log("set count: " + this.allobjects.length);
 
