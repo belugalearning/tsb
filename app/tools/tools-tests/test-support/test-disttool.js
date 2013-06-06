@@ -259,6 +259,51 @@ var ToolLayer = cc.Layer.extend({
         });
 
         //todo: merge arrays that contain duplicate items (come as a result of a>b<c arrangement of nodes)
+        var mergedSets=new Array();
+        var setsToRemove=new Array();
+
+        outsets.map( function(outset) {
+            for(var j=0; j<outset.length; j++)
+            {
+                var ps=outset[j];
+
+                for(var k=0; k<outsets.length; k++)
+                {
+                    var inspectset=outsets[k];
+                    if(inspectset!==outset)
+                    {
+                        for(var m=0; m<inspectset.length; m++)
+                        {
+                            var inspectps=inspectset[m];
+                            if(ps===inspectps && setsToRemove.indexOf(inspectset)==-1)
+                            {
+                                //these are the same, merge the arrays
+                                var merged=outset.slice(0);
+
+                                for(var n=0; n<inspectset.length; n++)
+                                {
+                                    if(merged.indexOf(inspectset[n])==-1)
+                                        merged.push(inspectset[n]);
+                                }
+
+                                mergedSets.push(merged);
+                                setsToRemove.push(outset);
+                                setsToRemove.push(inspectset);
+                            }
+                        }
+                    }
+                }
+                
+            }
+        });
+
+        setsToRemove.map(function(rs) {
+            outsets.pop(rs);
+        });
+
+        mergedSets.map(function(ms) {
+            outsets.push(ms);
+        });
 
         var ans =
         '<set>\n' +
