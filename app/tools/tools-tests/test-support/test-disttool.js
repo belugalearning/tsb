@@ -103,15 +103,14 @@ var ToolLayer = cc.Layer.extend({
         //iterate over tool state data
 
         // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
         // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
         
-        //disable pull from content service to test tool features
-        // var question = contentService.nextQuestion()
-        // var doc = new XmlDocument(question.initialState)
+        var question = contentService.nextQuestion()
+        var doc = new XmlDocument(question.initialState)
 
-        // //update question text
-        // this.titleLabel.setString(question.text)
+        //update question text
+        this.titleLabel.setString(question.text)
 
         console.log(doc);
         console.log(doc.children);
@@ -246,11 +245,14 @@ var ToolLayer = cc.Layer.extend({
             if(ps1.otherps!=null)
                 this.drawnode.drawSegment(ps1.getPosition(), ps1.otherps.getPosition(), 3, cc.c4b(255, 255, 255, 1));
 
-            //draw position dot
-            this.debugnode.drawDot(ps1.getPosition(), 4, cc.c4b(255, 0, 0, 255));
+            if(this.showDebug)
+            {
+                //draw position dot
+                this.debugnode.drawDot(ps1.getPosition(), 4, cc.c4b(255, 0, 0, 255));
 
-            this.debugnode.drawDot(cc.p(ps1.getBoundingBox().x, ps1.getBoundingBox().y), 3, cc.c4b(255, 255, 0, 150));
-            this.debugnode.drawDot(cc.p(ps1.getBoundingBox().x + ps1.getBoundingBox().width, ps1.getBoundingBox().y + ps1.getBoundingBox().height), 3, cc.c4b(255, 255, 0, 150));
+                this.debugnode.drawDot(cc.p(ps1.getBoundingBox().x, ps1.getBoundingBox().y), 3, cc.c4b(255, 255, 0, 150));
+                this.debugnode.drawDot(cc.p(ps1.getBoundingBox().x + ps1.getBoundingBox().width, ps1.getBoundingBox().y + ps1.getBoundingBox().height), 3, cc.c4b(255, 255, 0, 150));
+            }
                
         }
     },
@@ -262,24 +264,24 @@ var ToolLayer = cc.Layer.extend({
 
         if(d>220)
         {
-            //var origfwd=o1.otherps;
+            var origfwd=o1.otherps;
 
             this.breakForwardBondOn(o1);
 
-            if(o1.otherps==null && o1.linkingps==null)
+            if(origfwd.otherps==null)
             {
                 //break this object from set
-                o1.parentSet.pop(o1);
-                o1.parentSet=null;
+                origfwd.parentSet.pop(origfwd);
+                origfwd.parentSet=null;
 
                 //create a new set for this object
                 newset=new Array();
-                newset.push(o1);
+                newset.push(origfwd);
 
-                o1.parentSet=newset;
+                origfwd.parentSet=newset;
 
-                // if(o1.linkingps!=null) newset.push(o1.otherps)
-                // else newset.push(o1)
+                // if(origfwd.linkingps!=null) newset.push(origfwd.otherps)
+                // else newset.push(origfwd)
 
                 this.allobjects.push(newset);
             }
