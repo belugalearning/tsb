@@ -170,7 +170,7 @@ var ToolLayer = cc.Layer.extend({
 
     bondObjects:function(ps1, ps2)
     {
-        var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 200,300);
+        var slide=new cp.SlideJoint(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 100,200);
         this.space.addConstraint(slide);
 
         var spring=new cp.DampedSpring(ps1.refBody, ps2.refBody, cp.vzero, cp.vzero, 0, 3, 0.05);
@@ -219,6 +219,11 @@ var ToolLayer = cc.Layer.extend({
             if(this.touchSprite.linkingps!=null) this.testBrokenBond(this.touchSprite.linkingps);
         }
 
+        if(this.touchSprite!=null && this.touchSprite.otherps==null && this.touchSprite.linkingps==null)
+        {
+            this.testNewBond();
+        }
+
         //draw stuff
         this.drawnode.clear();
 
@@ -227,7 +232,7 @@ var ToolLayer = cc.Layer.extend({
             var ps1=this.allpsprites[i];
 
             if(ps1.otherps!=null)
-                this.drawnode.drawSegment(ps1.getPosition(), ps1.otherps.getPosition(), 5, cc.c4b(255, 255, 255, 1));
+                this.drawnode.drawSegment(ps1.getPosition(), ps1.otherps.getPosition(), 3, cc.c4b(255, 255, 255, 1));
         }
     },
 
@@ -258,6 +263,14 @@ var ToolLayer = cc.Layer.extend({
             o1.otherps=null;
             
         }
+    },
+
+    testNewBond:function(o1){
+        //iterate over all other sprites and get closest
+
+        //if distance < threshold, keep it as bonding object
+
+
     },
 
     onEnter:function () {
@@ -331,10 +344,10 @@ var ToolLayer = cc.Layer.extend({
 
 
     createPhysicsSprite: function( pos ) {
-        var body = new cp.Body(1, cp.momentForBox(1, 103, 103) );
+        var body = new cp.Body(1, cp.momentForBox(1, 73, 73) );
         body.setPos( pos );
         this.space.addBody( body );
-        var shape = new cp.BoxShape( body, 103, 103);
+        var shape = new cp.BoxShape( body, 73, 73);
         shape.setElasticity( 0.5 );
         shape.setFriction( 0.5 );
         this.space.addShape( shape );
