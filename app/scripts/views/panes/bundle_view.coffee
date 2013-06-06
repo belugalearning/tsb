@@ -21,7 +21,7 @@ define (require) ->
     showBundle: =>
       console.log "show bundle"
       console.log @bundle
-      @$el.append(@bundleTemplate(@bundle.attributes))
+      @$el.find(".details").html(@bundleTemplate(@bundle.attributes))
 
       if cc?
         console.log "got director already"
