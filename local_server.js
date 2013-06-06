@@ -14,7 +14,8 @@ app.use(liveReload.livereloadSnippet);
 app.use(express.static(__dirname + '/build'));
 
 app.get(/\/api\/bundles/, function(req, res) {
-  request(dbURI + '/_all_docs?include_docs=true', function(e,r,b) {
+  var bundlesURI = dbURI + '/_design/gen/_view/bundles?include_docs=true&descending=true'
+  request(bundlesURI, function(e,r,b) {
     res.send(JSON.parse(b).rows.map(function(r) { return r.doc }))
   })
 })
