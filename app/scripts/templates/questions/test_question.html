@@ -195,7 +195,7 @@
         var yval = parseInt($(this).val(), 10)
         return xVals.filter(function(xval) {
           return xval % yval == 0 && xval / yval > 1
-        }).length == 0)
+        }).length == 0
       })
 
       $('input[type="checkbox"][disabled]').prop('checked', false)
