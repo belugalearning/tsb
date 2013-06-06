@@ -10,7 +10,7 @@ define (require) ->
     template: _.template(QuestionTemplate)
 
     events:
-      "click :submit": "submit"
+      "click .submit-question": "submit"
       "click .preview": "preview"
 
     initialize: ->
@@ -22,8 +22,9 @@ define (require) ->
 
     submit: (e) =>
       e.preventDefault()
+      e.stopPropagation()
       $.ajax
-        url: '/api/bundle',
+        url: '/api/bundle'
         type: 'POST'
         contentType: 'application/json'
         data: JSON.stringify(@getFormData())
@@ -35,12 +36,12 @@ define (require) ->
 
     preview: (e) =>
       e.preventDefault()
+      e.stopPropagation()
       bundleOpts = @getFormData()
       console.log(bundleOpts)
       contentService.setBundle(new Bundle(bundleOpts))
       @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
-      # make preview
 
     getFormData: =>
       form_data =

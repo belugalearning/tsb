@@ -1,5 +1,6 @@
 <tr>
+  <% var dateobj = new Date(created) %>  %>
   <td><a href="/bundle/view/<%= _id %>"><%= title %></a></td>
   <td><%= author %></td>
-  <td><%= created %></td>
+  <td><%= dateobj.toDateString() %></td>
 </tr>
