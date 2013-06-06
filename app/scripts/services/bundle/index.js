@@ -45,7 +45,7 @@ define(function(require) {
     var yVals = bundle.vars.y.values
     this.vars.y = yVals[ Math.floor(Math.random() * yVals.length) ]
 
-    var xVals = bundle.vars.x.values.filter(function(v) { return v % self.vars.y == 0 })
+    var xVals = bundle.vars.x.values.filter(function(v) { return v > self.vars.y && v % self.vars.y == 0 })
     this.vars.x = xVals[ Math.floor(Math.random() * xVals.length) ]
 
     this.text =
