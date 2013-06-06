@@ -22,13 +22,21 @@ define (require) ->
 
     submit: (e) =>
       e.preventDefault()
-      $.post '/api/bundle',
-        @getFormData(),
-        (data) -> console.log 'success', data
+      $.ajax
+        url: '/api/bundle',
+        type: 'POST'
+        contentType: 'application/json'
+        data: JSON.stringify(@getFormData())
+        success: (data) ->
+          console.log('save success', data)
+          window.location = '/bundle'
+        error: (a,b,c) ->
+          console.log(a,b,c)
 
     preview: (e) =>
       e.preventDefault()
       bundleOpts = @getFormData()
+      console.log(bundleOpts)
       contentService.setBundle(new Bundle(bundleOpts))
       @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
@@ -36,6 +44,7 @@ define (require) ->
 
     getFormData: =>
       form_data =
+        title: @getFormVal('.bundle-title')
         questionType: @getFormVal('.question-type')
         tool:         @getFormVal('.tool')
         vars:

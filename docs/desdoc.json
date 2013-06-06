@@ -1,0 +1,10 @@
+{
+  "_id": "_design/gen", 
+  "views": {
+    "bundles": {
+      "map": "function (doc) {
+        if (doc.type == 'bundle') emit(new Date(doc.created).toJSON())
+      }"
+    }
+  }
+}

@@ -14,7 +14,8 @@ app.use(liveReload.livereloadSnippet);
 app.use(express.static(__dirname + '/build'));
 
 app.get(/\/api\/bundles/, function(req, res) {
-  request(dbURI + '/_all_docs?include_docs=true', function(e,r,b) {
+  var bundlesURI = dbURI + '/_design/gen/_view/bundles?include_docs=true&descending=true'
+  request(bundlesURI, function(e,r,b) {
     res.send(JSON.parse(b).rows.map(function(r) { return r.doc }))
   })
 })
@@ -28,11 +29,9 @@ app.get('/api/bundle/:id', function(req,res) {
 app.post(/^\/api\/bundle$/, function(req, res) {
   var bundle = req.body
   bundle.type = 'bundle'
-  bundle.title = 'Split x into equal groups (Distribution Tool)'
+  bundle.title = bundle.title || 'Split x into equal groups (Distribution Tool)'
   bundle.created = new Date().toString()
   bundle.author = 'Demo User'
-
-  console.log('create bundle', JSON.stringify(bundle,null,2))
 
   request({
     uri: dbURI,
