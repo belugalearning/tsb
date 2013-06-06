@@ -28,11 +28,9 @@ app.get('/api/bundle/:id', function(req,res) {
 app.post(/^\/api\/bundle$/, function(req, res) {
   var bundle = req.body
   bundle.type = 'bundle'
-  bundle.title = 'Split x into equal groups (Distribution Tool)'
+  bundle.title = bundle.title || 'Split x into equal groups (Distribution Tool)'
   bundle.created = new Date().toString()
   bundle.author = 'Demo User'
-
-  console.log('create bundle', JSON.stringify(bundle,null,2))
 
   request({
     uri: dbURI,

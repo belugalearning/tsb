@@ -35,6 +35,7 @@ define (require) ->
     preview: (e) =>
       e.preventDefault()
       bundleOpts = @getFormData()
+      console.log(bundleOpts)
       contentService.setBundle(new Bundle(bundleOpts))
       @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
@@ -42,6 +43,7 @@ define (require) ->
 
     getFormData: =>
       form_data =
+        title: @getFormVal('.bundle-title')
         questionType: @getFormVal('.question-type')
         tool:         @getFormVal('.tool')
         vars:
