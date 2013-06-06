@@ -29,6 +29,7 @@ define (require) ->
         data: JSON.stringify(@getFormData())
         success: (data) ->
           console.log('save success', data)
+          window.location = '/bundle'
         error: (a,b,c) ->
           console.log(a,b,c)
 
