@@ -209,17 +209,66 @@ var ToolLayer = cc.Layer.extend({
     },
 
     commitAnswer:function() {
-      var ans =
-        '<set>' +
-        this.allobjects.map(function(grp) { return (
-          '<set>' + 
-          grp.map(function(item) { return '<ci>' + item.sourceTag + '</ci>' }).join('') +
-          '</set>')
-        }).join('') +
-        '</set>'
+      // var ans =
+      //   '<set>' +
+      //   this.allobjects.map(function(grp) { return (
+      //     '<set>' + 
+      //     grp.map(function(item) { return '<ci>' + item.sourceTag + '</ci>' }).join('') +
+      //     '</set>')
+      //   }).join('') +
+      //   '</set>'
+
+      var ans=this.getSetXml();
 
       console.log('ans:', ans)
       this.setupTool()
+    },
+
+    getSetXml:function() {
+
+        var outsets=new Array();
+
+        this.allpsprites.map( function(ps) {
+
+            if(this.showDebug) console.log(ps.sourceTag + "   otherps: " +
+                ((ps.otherps==null) ? "-" : ps.otherps.sourceTag) + " linkingps: " + 
+                ((ps.linkingps==null) ? "-" : ps.linkingps.sourceTag));
+
+            var found=false;
+            for(var i=0; i<outsets.length; i++)
+            {
+                var inspectset=outsets[i];
+                if(ps.otherps && inspectset.indexOf(ps.otherps)!=-1)
+                {
+                    inspectset.push(ps);
+                    found=true;
+                }
+                else if(ps.linkingps && inspectset.indexOf(ps.linkingps)!=-1)
+                {
+                    inspectset.push(ps);
+                    found=true;
+                }
+            }
+
+            if(!found)
+            {
+                var newset=new Array();
+                newset.push(ps);
+                outsets.push(newset);
+            }
+        });
+
+        //todo: merge arrays that contain duplicate items (come as a result of a>b<c arrangement of nodes)
+
+        var ans =
+        '<set>\n' +
+        outsets.map(function(grp) { return (
+          ' <set>' + 
+          grp.map(function(item) { return '  <ci>' + item.sourceTag + '</ci>' }).join('') +
+          ' </set>\n')
+        }).join('') +
+        '</set>' 
+        return ans;       
     },
 
     update:function (dt) {
@@ -237,7 +286,10 @@ var ToolLayer = cc.Layer.extend({
         {
             if(this.touchSprite.otherps!=null) this.testBrokenBond(this.touchSprite);
             if(this.touchSprite.linkingps!=null) this.testBrokenBond(this.touchSprite.linkingps);
+
+            // this.testAndCreateSetFor(this.touchSprite);
         }
+
 
         if(this.touchSprite!=null && this.touchSprite.otherps==null && this.touchSprite.linkingps==null)
         {
@@ -280,8 +332,14 @@ var ToolLayer = cc.Layer.extend({
 
             this.breakForwardBondOn(o1);
 
-            this.testAndCreateSetFor(origfwd);
-            this.testAndCreateSetFor(o1);
+            // if(o1.otherps==null && o1.linkingps==null)
+            // {
+            //     o1.parentSet.pop(o1);
+            //     o1.parentSet==null;
+            // }
+
+            // this.testAndCreateSetFor(origfwd);
+            // this.testAndCreateSetFor(o1);
         }
     },
 
@@ -472,7 +530,17 @@ var ToolLayer = cc.Layer.extend({
         this.touchSprite=null;
         this.bondingObject=null;
 
-        console.log("set count: " + this.allobjects.length);
+        // console.log("set count: " + this.allobjects.length);
+
+        // this.allobjects.map(function(set) {
+        //     console.log("  set with length: " + set.length);
+
+        //     set.map(function(obj) {
+        //         console.log("    " + obj.sourceTag);
+        //     });
+        // });
+
+        console.log(this.getSetXml());
 
     },
 
