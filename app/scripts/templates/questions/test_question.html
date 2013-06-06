@@ -174,3 +174,31 @@
   </div>
 </div>
 
+<script>
+  $(function() {
+    $('.x-from, .x-to').on('change', function() {
+      var fromVal = parseInt($('.x-from').val(), 10)
+      var toVal = parseInt($('.x-to').val(), 10)
+      if (fromVal > toVal) {
+        $(this).hasClass('x-from')
+          ? $('.x-to').val(fromVal)
+          : $('.x-from').val(toVal)
+      }
+
+      var xVals = $('.x-from')
+        .children()
+        .toArray()
+        .map(function(opt) { return parseInt($(opt).val(), 10) })
+        .filter(function(v) { return fromVal <= v && v <= toVal })
+
+      $('input[type="checkbox"]').prop('disabled', function() {
+        var yval = parseInt($(this).val(), 10)
+        return xVals.filter(function(xval) {
+          return xval % yval == 0 && xval / yval > 1
+        }).length == 0
+      })
+
+      $('input[type="checkbox"][disabled]').prop('checked', false)
+    })
+  })
+</script>
