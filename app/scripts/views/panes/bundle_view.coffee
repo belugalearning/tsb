@@ -23,7 +23,7 @@ define (require) ->
       console.log "show bundle"
       console.log @bundle
       contentService.setBundle(new BundleService(@bundle.attributes))
-      @$el.append(@bundleTemplate(@bundle.attributes))
+      @$el.find(".details").html(@bundleTemplate(@bundle.attributes))
 
       if cc?
         console.log "got director already"
