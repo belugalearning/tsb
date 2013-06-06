@@ -185,23 +185,17 @@ var ToolLayer = cc.Layer.extend({
     },
 
     commitAnswer:function() {
+      var ans =
+        '<set>' +
+        this.allobjects.map(function(grp) { return (
+          '<set>' + 
+          grp.map(function(item) { return '<ci>' + item.sourceTag + '</ci>' }).join('') +
+          '</set>')
+        }).join('') +
+        '</set>'
 
-        var xout="<set>";
-        for(var i=0; i<this.allobjects.length; i++)
-        {
-            xout+="<set>";
-            var thisset=this.allobjects[i];
-            for(var j=0; j<thisset.length; j++)
-            {
-                var thiss=thisset[j];
-                xout+="<ci>" + thiss.sourceTag + "</ci>";
-            }
-            xout+="</set>";
-        }        
-        xout+="</set>";
-        console.log(xout);
-
-        //do something with this -- xout is this xml reprensentation of the tool state
+      console.log('ans:', ans)
+      this.setupTool()
     },
 
     update:function (dt) {
