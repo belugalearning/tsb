@@ -15,7 +15,7 @@ var ToolLayer = cc.Layer.extend({
     drawnode:null,
     commitBtn:null,
     allobjects:new Array(),
-    showDebug:false,
+    showDebug:true,
 
     init:function () {
 
@@ -139,8 +139,10 @@ var ToolLayer = cc.Layer.extend({
                 //add the text value of the original item
                 s.sourceTag=jchild.val;
 
-                // var lbl=cc.LabelTTF.create(s.sourceTag, "Helvetica", 10);
-                // s.addChild(lbl);
+                if(this.showDebug) {
+                    var lbl=cc.LabelTTF.create(s.sourceTag, "Helvetica", 10);
+                    s.addChild(lbl);
+                }
 
                 //reference to set
                 s.parentSet=thisset;
@@ -264,6 +266,8 @@ var ToolLayer = cc.Layer.extend({
 
         if(d>220)
         {
+            console.log("breaking bond on " + o1.sourceTag + " to " + o1.otherps.sourceTag);
+
             var origfwd=o1.otherps;
 
             this.breakForwardBondOn(o1);
