@@ -16,11 +16,6 @@ define(function(require) {
       .find('ph#group-size')
       .replaceWith(opts.questionType == 'split_x_y_eq_grps' ? $(xDivYTemplate) : $(yTemplate))
       [0]
-
-    this.questions = []
-    for (var i = 0; i < this.numQuestions; ++i) {
-      this.questions.push(new Question(this))
-    }
   }
 
   Bundle.prototype.evalAns = function(ans, question) {
@@ -37,6 +32,10 @@ define(function(require) {
     return (
       reqNumGrps == $groups.length &&
       reqNumGrps == $groups.filter(function(i, grp) { return $(grp).children().length == reqGrpSize }).length)
+  }
+
+  Bundle.prototype.createQuestion = function() {
+    return new Question(this)
   }
 
   function Question(bundle) {
