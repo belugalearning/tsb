@@ -192,8 +192,10 @@
         .filter(function(v) { return fromVal <= v && v <= toVal })
 
       $('input[type="checkbox"]').prop('disabled', function() {
-        var val = parseInt($(this).val(), 10)
-        return !xVals.filter(function(xval) { return xval % val == 0 && Math.floor(xval/val) > 1 }).length
+        var yval = parseInt($(this).val(), 10)
+        return xVals.filter(function(xval) {
+          return xval % yval == 0 && xval / yval > 1
+        }).length == 0)
       })
 
       $('input[type="checkbox"][disabled]').prop('checked', false)
