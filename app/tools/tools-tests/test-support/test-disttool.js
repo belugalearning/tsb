@@ -114,7 +114,8 @@ var ToolLayer = cc.Layer.extend({
         }
         else {
             // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-            var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+            // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+            var doc=new XmlDocument("<set> <set>  <ci>item2</ci>  <ci>item3</ci>  <ci>item4</ci>  <ci>item0</ci>  <ci>item5</ci>  <ci>item1</ci>   <ci>item2</ci>  <ci>item3</ci>  <ci>item4</ci>  <ci>item0</ci>  <ci>item5</ci>  <ci>item1</ci>   <ci>item2</ci>  <ci>item3</ci>  <ci>item4</ci>  <ci>item0</ci>  <ci>item5</ci>  <ci>item1</ci> </set></set> ");
             // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
 
             this.showDebug=true;
@@ -147,6 +148,9 @@ var ToolLayer = cc.Layer.extend({
                 //add the text value of the original item
                 s.sourceTag=jchild.val;
 
+                //assume it's not the first item in looping set
+                s.isFirstItem=false;
+
                 if(this.showDebug) {
                     var lbl=cc.LabelTTF.create(s.sourceTag, "Helvetica", 10);
                     s.addChild(lbl);
@@ -178,6 +182,7 @@ var ToolLayer = cc.Layer.extend({
                 if(ps1!=ps2 && ps1!=null && ps2!=null)
                 {
                     this.bondObjects(ps1, ps2);
+                    if(k==0) ps2.isFirstItem=true;
                 }
     
             }
@@ -226,88 +231,45 @@ var ToolLayer = cc.Layer.extend({
 
     getSetXml:function() {
 
-        var outsets=new Array();
+        var itsets=new Array();
+        var allinsets=new Array();
 
-        this.allpsprites.map( function(ps) {
+        this.allpsprites.map(function (ps) {
 
-            if(this.showDebug) console.log(ps.sourceTag + "   otherps: " +
-                ((ps.otherps==null) ? "-" : ps.otherps.sourceTag) + " linkingps: " + 
-                ((ps.linkingps==null) ? "-" : ps.linkingps.sourceTag));
+            // console.log(ps.sourceTag + "   otherps: " +
+            //     ((ps.otherps==null) ? "-" : ps.otherps.sourceTag) + " linkingps: " + 
+            //     ((ps.linkingps==null) ? "-" : ps.linkingps.sourceTag));
 
-            var found=false;
-            for(var i=0; i<outsets.length; i++)
+            if((ps.linkingps==null || ps.otherps==null || ps.isFirstItem) && allinsets.indexOf(ps)==-1)
             {
-                var inspectset=outsets[i];
-                if(ps.otherps && inspectset.indexOf(ps.otherps)!=-1)
-                {
-                    inspectset.push(ps);
-                    found=true;
-                }
-                else if(ps.linkingps && inspectset.indexOf(ps.linkingps)!=-1)
-                {
-                    inspectset.push(ps);
-                    found=true;
-                }
+                var nextnode=ps;
+                var itset=new Array();
+
+                //build a set by stepping from this ps
+                do{
+                    var thisnode=nextnode;
+                    allinsets.push(thisnode);
+                    itset.push(thisnode);
+
+                    //look forward first
+                    if(thisnode.otherps!=null && itset.indexOf(thisnode.otherps)==-1)
+                        nextnode=thisnode.otherps;
+                    //then backward
+                    else if(thisnode.linkingps!=null && itset.indexOf(thisnode.linkingps==-1))
+                        nextnode=thisnode.linkingps;
+                    //then stop
+                    else
+                        nextnode=null;
+
+                } while (nextnode!=null && allinsets.indexOf(nextnode)==-1)
+
+                itsets.push(itset);
             }
-
-            if(!found)
-            {
-                var newset=new Array();
-                newset.push(ps);
-                outsets.push(newset);
-            }
-        });
-
-        //todo: merge arrays that contain duplicate items (come as a result of a>b<c arrangement of nodes)
-        var mergedSets=new Array();
-        var setsToRemove=new Array();
-
-        outsets.map( function(outset) {
-            for(var j=0; j<outset.length; j++)
-            {
-                var ps=outset[j];
-
-                for(var k=0; k<outsets.length; k++)
-                {
-                    var inspectset=outsets[k];
-                    if(inspectset!==outset)
-                    {
-                        for(var m=0; m<inspectset.length; m++)
-                        {
-                            var inspectps=inspectset[m];
-                            if(ps===inspectps && setsToRemove.indexOf(inspectset)==-1)
-                            {
-                                //these are the same, merge the arrays
-                                var merged=outset.slice(0);
-
-                                for(var n=0; n<inspectset.length; n++)
-                                {
-                                    if(merged.indexOf(inspectset[n])==-1)
-                                        merged.push(inspectset[n]);
-                                }
-
-                                mergedSets.push(merged);
-                                setsToRemove.push(outset);
-                                setsToRemove.push(inspectset);
-                            }
-                        }
-                    }
-                }
-                
-            }
-        });
-
-        setsToRemove.map(function(rs) {
-            outsets.pop(rs);
-        });
-
-        mergedSets.map(function(ms) {
-            outsets.push(ms);
         });
 
         var ans =
         '<set>\n' +
-        outsets.map(function(grp) { return (
+        itsets.map(function(grp) { return (
           ' <set>' + 
           grp.map(function(item) { return '  <ci>' + item.sourceTag + '</ci>' }).join('') +
           ' </set>\n')
@@ -413,8 +375,14 @@ var ToolLayer = cc.Layer.extend({
     {
         this.space.removeConstraint(o1.spring);
         this.space.removeConstraint(o1.slide);
+
+        o1.otherps.isFirstItem=false;
+        if (o1.otherps!=null) o1.otherps.isFirstItem=false;
+        if (o1.linkingps!=null) o1.linkingps.isFirstItem=false;
+
         o1.otherps.linkingps=null;
         o1.otherps=null;
+
     },
 
     testNewBond:function(o1){
