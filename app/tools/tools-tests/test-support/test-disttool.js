@@ -29,7 +29,7 @@ var ToolLayer = cc.Layer.extend({
         var size = cc.Director.getInstance().getWinSize();
 
         clc=cc.LayerColor.create(cc.c4b(70,70, 70,255));
-        this.addChild(clc,0);
+        this.addChild(clc,-2);
 
         // this.titleLabel = cc.LabelTTF.create("Empty Tool", "Helvetica", 38);
         // this.titleLabel.setPosition(cc.p(size.width / 2, size.height - 40));
@@ -42,6 +42,10 @@ var ToolLayer = cc.Layer.extend({
         this.addChild(this.drawnode, 0);
 
         this.space = new cp.Space();
+
+        this.backgroundSprite=cc.Sprite.create(s_imagePath+"background.png");
+        this.backgroundSprite.setPosition(size.width/2, size.height/2);
+        this.addChild(this.backgroundSprite, -1);
 
         this.commitBtn=cc.Sprite.create(s_imagePath+"commit.png");
         this.commitBtn.setPosition(cc.p(size.width-60, size.height-35));
@@ -94,13 +98,13 @@ var ToolLayer = cc.Layer.extend({
         //iterate over tool state data
 
         // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
         // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
         
-        var question = contentService.nextQuestion()
-        var doc = new XmlDocument(question.initialState)
+        // var question = contentService.nextQuestion()
+        // var doc = new XmlDocument(question.initialState)
         //update question text
-        this.titleLabel.setString(question.text)
+        // this.titleLabel.setString(question.text)
 
         console.log(doc);
         console.log(doc.children);
