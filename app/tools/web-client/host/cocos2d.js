@@ -49,6 +49,8 @@
         ]
     };
 
+    window.dbc = c;
+
     if(!d.createElement('canvas').getContext){
         var s = d.createElement('div');
         s.innerHTML = '<h2>Your browser does not support HTML5 canvas!</h2>' +

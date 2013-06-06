@@ -386,8 +386,10 @@ cc.TextureCacheCanvas = cc.Class.extend(/** @lends cc.TextureCacheCanvas# */{
  * @return {cc.TextureCache}
  */
 cc.TextureCacheCanvas.getInstance = function () {
-    if (!cc.g_sharedTextureCache)
+    if (!cc.g_sharedTextureCache) {
+        console.log("ksdfj");
         cc.g_sharedTextureCache = new cc.TextureCacheCanvas();
+    }
     return cc.g_sharedTextureCache;
 };
 
