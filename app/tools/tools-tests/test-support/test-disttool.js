@@ -110,11 +110,14 @@ var ToolLayer = cc.Layer.extend({
             //update question text
             this.titleLabel.setString(question.text)            
 
+            this.showDebug=false;
         }
         else {
             // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
             var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
             // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
+
+            this.showDebug=true;
         }
 
         console.log(doc);
