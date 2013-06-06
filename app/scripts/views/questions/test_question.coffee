@@ -22,8 +22,9 @@ define (require) ->
 
     submit: (e) =>
       e.preventDefault()
-      # TODO: get data, populate model, save
-      #question = new QuestionModel( form_data )
+      $.post '/api/bundle',
+        @getFormData(),
+        (data) -> console.log 'success', data
 
     preview: (e) =>
       e.preventDefault()
