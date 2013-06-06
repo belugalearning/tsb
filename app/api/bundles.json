@@ -3,24 +3,28 @@
     "_id":  "1001",
     "_rev": "001",
     "title": "Linear Equations 1",
-    "author": "Bob Balaban"
+    "author": "Bob Balaban",
+    "created": "July 3"
   },
   {
     "_id":  "1002",
     "_rev": "001",
     "title": "Linear Equations 2",
-    "author": "Bob Balaban"
+    "author": "Bob Balaban",
+    "created": "July 3"
   },
   {
     "_id":  "1003",
     "_rev": "001",
     "title": "Algebra",
-    "author": "Paul Dirac"
+    "author": "Paul Dirac",
+    "created": "July 3"
   },
   {
     "_id":  "1004",
     "_rev": "001",
     "title": "Differential Equations 1",
-    "author": "Cee Threepio"
+    "author": "Cee Threepio",
+    "created": "July 3"
   }
 ]

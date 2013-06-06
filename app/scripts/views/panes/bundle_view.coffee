@@ -1,6 +1,7 @@
 define (require) ->
 
   Backbone = require 'backbone'
+  BundleService = require 'services/bundle/index'
   Bundle = require 'models/bundle'
   BundleViewTemplate = require 'text!templates/panes/bundle_view.html'
   BundlePreviewTemplate = require 'text!templates/modules/bundle_preview.html'
@@ -21,6 +22,7 @@ define (require) ->
     showBundle: =>
       console.log "show bundle"
       console.log @bundle
+      contentService.setBundle(new BundleService(@bundle.attributes))
       @$el.append(@bundleTemplate(@bundle.attributes))
 
       if cc?

@@ -94,11 +94,13 @@ var ToolLayer = cc.Layer.extend({
         //iterate over tool state data
 
         // var doc=new XmlDocument("<set><set><ci>item0</ci><ci>item1</ci><ci>item2</ci><ci>item3</ci><ci>item4</ci><ci>item5</ci></set></set>");
-        var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
+        // var doc=new XmlDocument("<set><set><ci>item4</ci><ci>item2</ci><ci>item0</ci></set><set><ci>item1</ci><ci>item3</ci><ci>item5</ci></set></set>");
         // var doc=new XmlDocument("<set><set><ci>item2</ci><ci>item0</ci></set><set><ci>item3</ci><ci>item5</ci></set><set><ci>item4</ci><ci>item1</ci></set></set>");
         
+        var question = contentService.nextQuestion()
+        var doc = new XmlDocument(question.initialState)
         //update question text
-        this.titleLabel.setString("insert title here");
+        this.titleLabel.setString(question.text)
 
         console.log(doc);
         console.log(doc.children);
@@ -183,23 +185,17 @@ var ToolLayer = cc.Layer.extend({
     },
 
     commitAnswer:function() {
+      var ans =
+        '<set>' +
+        this.allobjects.map(function(grp) { return (
+          '<set>' + 
+          grp.map(function(item) { return '<ci>' + item.sourceTag + '</ci>' }).join('') +
+          '</set>')
+        }).join('') +
+        '</set>'
 
-        var xout="<set>";
-        for(var i=0; i<this.allobjects.length; i++)
-        {
-            xout+="<set>";
-            var thisset=this.allobjects[i];
-            for(var j=0; j<thisset.length; j++)
-            {
-                var thiss=thisset[j];
-                xout+="<ci>" + thiss.sourceTag + "</ci>";
-            }
-            xout+="</set>";
-        }        
-        xout+="</set>";
-        console.log(xout);
-
-        //do something with this -- xout is this xml reprensentation of the tool state
+      console.log('ans:', ans)
+      this.setupTool()
     },
 
     update:function (dt) {
