@@ -3,7 +3,7 @@ var util = require('util'),
   liveReload = require('./node_modules/grunt-contrib-livereload/lib/utils'),
   request = require('request')
 
-var dbURI = 'http://127.0.0.1:5984/tsb-demo'
+var dbURI = 'http://pull.zubi.me:5984/tsb-demo'
 
 var app = express();
 app.use(express.bodyParser())
