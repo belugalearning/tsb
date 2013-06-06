@@ -8,17 +8,19 @@ var contentService
   ContentService.prototype.setBundle = function(bundle) {
     this.bundle = bundle
     this.currentQuestionIx = -1
-    if (this.bundle) this.nextQuestion()
   }
 
   ContentService.prototype.nextQuestion = function() {
     if (!this.bundle) return null
-    var q = this.bundle.questions[++this.currentQuestionIx]
-    return this.currentQuestion
+    return this.bundle.questions[++this.currentQuestionIx]
   }
 
   ContentService.prototype.currentQuestion = function() {
     return this.bundle && this.bundle.questions[this.currentQuestionIx]
+  }
+
+  ContentService.prototype.evalAns = function(ans) {
+    return this.bundle.evalAns(ans, this.currentQuestion())
   }
 
   contentService = new ContentService()
