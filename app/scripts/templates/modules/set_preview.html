@@ -1,0 +1,11 @@
+<h3><%= name %></h3>
+<p>Author: <%= author %></p>
+<p>Created: <%= created %></p>
+<h4>Bundles</h4>
+<ul class="set-bundle-list">
+  <%  bundles.map( function(item) { %>
+    <li id="<%= item._id %>" class="set-bundle"><img class="drag-handle" src="/images/drag_texture.png"><%= item.title %></li>
+  <% }) %>
+</ul>
+<button class="save-set btn btn-primary">Save</button>
+

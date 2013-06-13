@@ -1,9 +1,10 @@
 <tr>
   <td><a href="/set/view/<%= _id %>"><%= name %></a></td>
   <td>
-    <%  for (var i = 0; i < bundles.length; i++) { %>
-      <span class="label label-info"><%= bundles[i].title %></span>
-    <% } %>
+    <%  bundles.map( function(item) { %>
+      <span class="label label-info"><%= item.title %></span>
+    <% }) %>
   </td>
   <td>Jul 3</td>
 </tr>
+

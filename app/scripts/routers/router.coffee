@@ -11,6 +11,7 @@ define (require) ->
       'bundle/view/:id' : 'showBundleView'
       'set'             : 'showSet'
       'set/new'         : 'showSetNew'
+      'set/view/:id'        : 'showSetView'
       'analytics'       : 'showAnalytics'
       'account'         : 'showAccount'
 
@@ -35,6 +36,9 @@ define (require) ->
     
     showSet: =>
       @app.setCurrentPane('set')
+
+    showSetView: =>
+      @app.setCurrentPane('set_view')
 
     showAnalytics: =>
       @app.setCurrentPane('analytics')

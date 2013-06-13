@@ -5,6 +5,7 @@ define (require) ->
   Bundle = require 'models/bundle'
   BundleViewTemplate = require 'text!templates/panes/bundle_view.html'
   BundlePreviewTemplate = require 'text!templates/modules/bundle_preview.html'
+  
   class BundleViewPane extends Backbone.View
     template: _.template(BundleViewTemplate)
     bundleTemplate: _.template(BundlePreviewTemplate)

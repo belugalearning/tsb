@@ -9,6 +9,7 @@ define (require) ->
   BundleView        = require 'views/panes/bundle_view'
   SetList           = require 'views/panes/set_list'
   SetNew            = require 'views/panes/set_new'
+  SetView           = require 'views/panes/set_view'
 
   AnalyticsPane     = require 'views/panes/analytics'
   AccountPane       = require 'views/panes/account'
@@ -33,6 +34,7 @@ define (require) ->
         "bundle_view"     : BundleView
         "set"             : SetList
         "set_new"         : SetNew
+        "set_view"        : SetView
         "analytics"       : AnalyticsPane
         "account"         : AccountPane
 

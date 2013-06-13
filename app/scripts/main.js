@@ -6,7 +6,7 @@
       paths: {
           text: '../components/requirejs-text/text',
           jquery: '../components/jquery/jquery',
-          "jquery-ui-dragdrop" :  '../components/jquery-ui-dragdrop/js/jquery-ui-1.10.2.custom',
+          "jquery-ui" :  '../components/jquery-ui/ui/jquery-ui',
           "jquery-ui-touch-punch" :  '../components/jquery-ui-touch-punch/jquery.ui.touch-punch',
           "jquery-dateFormat": '../components/jquery-dateFormat/jquery.dateFormat-1.0',
           parsley: '../components/parsley/parsley',

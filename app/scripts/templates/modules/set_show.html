@@ -1,0 +1,10 @@
+<h3><%= name %></h3>
+<p>Author: <%= author %></p>
+<p>Created: <%= created %></p>
+<h4>Bundles</h4>
+<ul>
+  <%  bundles.map( function(item) { %>
+    <li><%= item.title %></li>
+  <% }) %>
+</ul>
+

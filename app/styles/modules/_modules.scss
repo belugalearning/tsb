@@ -6,3 +6,42 @@
   top: 0;
   left: 0;
 }
+
+.set-bundle-list {
+  padding: 10px;
+  margin: 0 0 16px 0;
+  width: 330px;
+  background-color: #D8EEFF;
+  @include border-radius($sap_radius);
+  li {
+    @include background-image(linear-gradient(white, #aaaaaa));
+    border: 1px solid #ddd;
+    padding: 5px 5px 5px 5px;
+    margin: 4px;
+    @include border-radius($sap_radius);
+    width: 300px;
+    list-style-type:none;
+    cursor:default;
+    .drag-handle {
+      padding-right: 5px;
+      cursor: url('/images/openhand.png') 10 5, move;
+    }
+  }
+  .sortable-placeholder {
+    border: 1px dashed #333;
+    background: none;
+  }
+}
+
+li.ui-sortable-helper {
+    .drag-handle {
+      padding-right: 5px;
+      cursor: url('/images/closedhand.png') 10 5, move;
+    }
+}
+
+
+
+.bundle-drop-active {
+  background-color: #6CB8F3;
+}

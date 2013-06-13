@@ -1,39 +1,149 @@
 [ 
   { 
-    "_id": 1001,
+    "_id": "daae837fbd3643b493d0c72071013cdd",
+    "_rev": "1-aa3e362366776ccb0eeecb9fb8fab9ee",
     "name": "Test Set 1",
+    "type": "set",
+    "created": "Thu Jun 06 2013 13:37:20 GMT+0100 (BST)",
+    "author": "Soren Kierkergard",
     "bundles": 
       [ 
         {
-          "_id":  "1001",
-          "_rev": "001",
-          "title": "Bundle 1",
-          "author": "Bob Balaban"
+          "_id": "d16e837fbd3643b493d0c72071013c8c",
+          "_rev": "1-d63e362366776ccb0eeecb9fb8fab98c",
+          "title": "Monday 11",
+          "questionType": "split_x_y_eq_grps",
+          "tool": "DistributionTool",
+          "vars": {
+            "x": {
+              "values": [
+                4,
+                6,
+                8
+              ]
+            },
+            "y": {
+              "values": [
+                2
+              ]
+            }
+          },
+          "numQuestions": "5",
+          "type": "bundle",
+          "created": "Mon Jun 10 2013 11:42:29 GMT+0100 (BST)",
+          "author": "Demo User"
         },
         {
-          "_id":  "1002",
-          "_rev": "001",
-          "title": "Bundle 2",
-          "author": "Bob Balaban"
+          "_id": "d16e837fbd3643b493d0c720710132ee",
+          "_rev": "1-e0502c597c5ce63c583598b6daee17cd",
+          "title": "Split BIG x into 2 equal groups",
+          "questionType": "split_x_y_eq_grps",
+          "tool": "DistributionTool",
+          "vars": {
+            "x": {
+              "values": [
+                16,
+                18,
+                20
+              ]
+            },
+            "y": {
+              "values": [
+                2
+              ]
+            }
+          },
+          "numQuestions": "1",
+          "type": "bundle",
+          "created": "Thu Jun 06 2013 13:37:20 GMT+0100 (BST)",
+          "author": "Demo User"
         }
       ]
   },
   { 
-    "_id": 1002,
-    "name": "Test Set 2",
+    "_id": "dbbe837fbd3643b493d0c72071013cdxx",
+    "_rev": "1-bb3e362366776ccb0eeecb9fb8fab9xx",
+    "name": "Test Set 3",
+    "type": "set",
+    "created": "Thu Jun 06 2013 13:37:20 GMT+0100 (BST)",
+    "author": "Elvis Presley",
     "bundles": 
       [ 
         {
-          "_id":  "1003",
-          "_rev": "001",
-          "title": "Bundle 3",
-          "author": "Paul Dirac"
+          "_id": "d16e837fbd3643b493d0c72071012f85",
+          "_rev": "1-2ed5d84e08120612d10896435e0853dd",
+          "title": "SAndy2",
+          "questionType": "split_x_eq_grps_y",
+          "tool": "DistributionTool",
+          "vars": {
+            "x": {
+              "values": [
+                4,
+                6,
+                8,
+                9,
+                10,
+                12,
+                14,
+                15,
+                16
+              ]
+            },
+            "y": {
+              "values": [
+                2,
+                5,
+                8,
+                6,
+                7
+              ]
+            }
+          },
+          "numQuestions": "5",
+          "type": "bundle",
+          "created": "Thu Jun 06 2013 12:29:20 GMT+0100 (BST)",
+          "author": "Demo User"
         },
         {
-          "_id":  "1004",
-          "_rev": "001",
-          "title": "Bundle 4",
-          "author": "Cee Threepio"
+          "_id": "d16e837fbd3643b493d0c72071012d13",
+          "_rev": "1-9c227155edd7b476fb847f02b29e3e5b",
+          "title": "Split x into equal groups (Distribution Tool)",
+          "questionType": "split_x_y_eq_grps",
+          "tool": "DistributionTool",
+          "vars": {
+            "x": {
+              "values": [
+                4,
+                6,
+                8,
+                9,
+                10,
+                12,
+                14,
+                15,
+                16,
+                18,
+                20
+              ]
+            },
+            "y": {
+              "values": [
+                2,
+                5,
+                8,
+                3,
+                6,
+                9,
+                4,
+                7,
+                10
+              ]
+            }
+          },
+          "numQuestions": "1",
+          "type": "bundle",
+          "created": "Thu Jun 06 2013 12:26:14 GMT+0100 (BST)",
+          "author": "Demo User"
         }
       ]
   }
