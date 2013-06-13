@@ -4,4 +4,7 @@ define (require) ->
 
   class BundleModel extends Backbone.Model
     idAttribute: "_id"
-    urlRoot: "/api/bundle"
+    urlRoot: "/api/bundle/"
+
+    url: ->
+      "/api/bundle/#{@get("id")}"
