@@ -2,10 +2,10 @@ var contentService
 
 ;(function() {
   ContentService = function() {
-    this.setBundle(null)
+    this.setTask(null)
   }
 
-  ContentService.prototype.setBundle = function(bundle) {
+  ContentService.prototype.setTask = function(bundle) {
     this.bundle = bundle
     this.currentQuestionIx = -1
     this.questions = []

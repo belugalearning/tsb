@@ -50,7 +50,7 @@ app.get('/api/*', function(req,res) {
   res.sendfile(__dirname + '/app/api/' + req.url.split("/").slice(-1)[0].split("?")[0] + '.json');
 });
 
-app.get(/^\/(bundle|set|analytics|account)(\/*)?/, function(req,res) { res.sendfile(__dirname + '/app/index.html'); });
+app.get(/^\/(task|activity|analytics|account)(\/*)?/, function(req,res) { res.sendfile(__dirname + '/app/index.html'); });
 
 app.listen(3500);
 console.log('Listening on port 3500');

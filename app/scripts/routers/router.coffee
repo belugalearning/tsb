@@ -4,44 +4,52 @@ define (require) ->
 
   class MainRouter extends Backbone.Router
     routes:
-      ''                : 'showRoot'
-      '/'               : 'showRoot'
-      'bundle'          : 'showBundleList'
-      'bundle/new'      : 'showBundleNew'
-      'bundle/view/:id' : 'showBundleView'
-      'set'             : 'showSet'
-      'set/new'         : 'showSetNew'
-      'set/view/:id'        : 'showSetView'
-      'analytics'       : 'showAnalytics'
-      'account'         : 'showAccount'
+      ''                : 'Root'
+      '/'               : 'Root'
+      'task'            : 'TaskList'
+      'task/new'        : 'TaskNew'
+      'task/view/:id'   : 'TaskView'
+      'task/edit/:id'   : 'TaskEdit'
+      'activity'             : 'Activity'
+      'activity/new'         : 'ActivityNew'
+      'activity/view/:id'    : 'ActivityView'
+      'analytics'       : 'Analytics'
+      'account'         : 'Account'
 
     initialize: ->
       @app = arguments[0].app
 
-    showRoot: =>
+    Root: =>
       @app.setCurrentPane('root')
 
-    showBundleList: =>
-      @app.setCurrentPane('bundle')
+    TaskList: =>
+      @app.setCurrentPane('task')
 
-    showBundleView: (id) =>
-      window.bundleViewID = id
-      @app.setCurrentPane('bundle_view')
+    TaskNew: =>
+      window.taskEditID = null
+      @app.setCurrentPane('task_new')
 
-    showBundleNew: =>
-      @app.setCurrentPane('bundle_new')
+    TaskView: (id) =>
+      #TODO: remove global, pass id into setCurrentPane
+      window.taskViewID = id
+      @app.setCurrentPane('task_view')
 
-    showSetNew: =>
-      @app.setCurrentPane('set_new')
+    TaskEdit: (id) =>
+      #TODO: remove global, pass id into setCurrentPane
+      window.taskEditID = id
+      @app.setCurrentPane('task_edit')
+
+    Activity: =>
+      @app.setCurrentPane('activity')
+
+    ActivityNew: =>
+      @app.setCurrentPane('activity_new')
     
-    showSet: =>
-      @app.setCurrentPane('set')
+    ActivityView: =>
+      @app.setCurrentPane('activity_view')
 
-    showSetView: =>
-      @app.setCurrentPane('set_view')
-
-    showAnalytics: =>
+    Analytics: =>
       @app.setCurrentPane('analytics')
 
-    showAccount: =>
+    Account: =>
       @app.setCurrentPane('account')

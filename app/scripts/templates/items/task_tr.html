@@ -1,0 +1,7 @@
+<tr>
+  <% var dateobj = new Date(created) %>  %>
+  <td><a class="bundle-view" href="/task/view/<%= _id %>"><%= title %></a></td>
+  <td><%= author %></td>
+  <td><%= dateobj.toDateString() %></td>
+  <td><a class="bundle-view" href="/bundle/edit/<%= _id %>"><button class="btn btn-icon"><img src="/images/edit_icon.png" width="16px" height="16px"></button></a></td>
+</tr>

@@ -4,7 +4,8 @@ define (require) ->
   PreviewView = require 'views/modules/preview'
   QuestionTemplate = require 'text!templates/questions/test_question.html'
   QuestionModel = require 'models/questions/test_question'
-  Bundle = require 'services/bundle/index'
+  BBTask = require 'models/task'
+  Bundle = require 'services/task/index'
 
   class TestQuestion extends Backbone.View
     template: _.template(QuestionTemplate)
@@ -15,33 +16,74 @@ define (require) ->
 
     initialize: ->
       @page = @options.page
+      @task = @options.bundle || new QuestionModel()
 
     render: =>
       tmpl = @template()
       @$el.html( tmpl )
+      @setFormData()
+
+    setFormData: =>
+      console.log @task
+
+      questionType = @task.get('questionType')
+
+      if @resolve(@task.get('vars'), "x.values")  
+        xVars = @task.get('vars').x.values
+
+      if @resolve(@task.get('vars'), "x.values") 
+        yVars = @task.get('vars').y.values
+
+      tool = @task.get('tool')
+      numOfQuestions = @task.get('numQuestions')
+      bundleTitle = @task.get('title') 
+
+      if questionType
+        @setSelectVal('.question-type', questionType)
+
+      if xVars
+        @setSelectVal('.x-from', xVars[0])
+        @setSelectVal('.x-to',  xVars[1])
+
+      console.log yVars
+
+      if yVars
+        @setCheckboxVals('.equation-y-checkboxes', yVars)
+      
+      if tool
+        @setSelectVal('.tool', tool)
+
+      if numOfQuestions
+        @setSelectVal('.num-questions', numOfQuestions)
+
+      if bundleTitle
+        @setSelectVal('.bundle-title', taskTitle)
 
     submit: (e) =>
       e.preventDefault()
       e.stopPropagation()
-      $.ajax
-        url: '/api/bundle'
-        type: 'POST'
-        contentType: 'application/json'
-        data: JSON.stringify(@getFormData())
-        success: (data) ->
-          console.log('save success', data)
-          window.location = '/bundle'
-        error: (a,b,c) ->
-          console.log(a,b,c)
+      q = new BBTask(@getFormData())
+      q.set(@task.attributes)
+      console.log q
+      q.save({ success: @redirect })
 
     preview: (e) =>
       e.preventDefault()
       e.stopPropagation()
-      bundleOpts = @getFormData()
-      console.log(bundleOpts)
-      contentService.setBundle(new Bundle(bundleOpts))
+      taskOpts = @getFormData()
+      console.log(taskOpts)
+      contentService.setBundle(new Task(taskOpts))
       @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
+
+    setSelectVal: (selector, value) =>
+      $control = @$el.find(selector)
+      window.tem = $control
+      $control.val( value )
+
+    setCheckboxVals: (selector, values) =>
+      $checkboxHolder = @$el.find(selector)
+      $checkboxHolder.find('input').val(values)
 
     getFormData: =>
       form_data =
@@ -74,3 +116,13 @@ define (require) ->
       $(selector + ' :checked').each ->
         allVals.push(parseInt($(this).val(), 10))
       allVals
+
+    redirect: (model, response, options) =>
+      console.log "redirect"
+
+    resolve: (obj, prop) =>
+      ns = prop.split('.')
+      while obj && ns[0]
+        obj = obj[ns.shift()] || undefined
+      return obj
+

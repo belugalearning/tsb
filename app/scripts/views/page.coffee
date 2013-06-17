@@ -4,12 +4,13 @@ define (require) ->
   MainLayout = require 'text!templates/layouts/index.html'
 
   RootPane          = require 'views/panes/root'
-  BundleList        = require 'views/panes/bundle_list'
-  BundleNew         = require 'views/panes/bundle_new'
-  BundleView        = require 'views/panes/bundle_view'
-  SetList           = require 'views/panes/set_list'
-  SetNew            = require 'views/panes/set_new'
-  SetView           = require 'views/panes/set_view'
+  TaskList          = require 'views/panes/task_list'
+  TaskNew           = require 'views/panes/task_new'
+  TaskView          = require 'views/panes/task_view'
+  TaskEdit          = require 'views/panes/task_edit'
+  ActivityList      = require 'views/panes/activity_list'
+  ActivityNew       = require 'views/panes/activity_new'
+  ActivityView      = require 'views/panes/activity_view'
 
   AnalyticsPane     = require 'views/panes/analytics'
   AccountPane       = require 'views/panes/account'
@@ -29,12 +30,13 @@ define (require) ->
       @currentPane = null
       @panes = 
         "root"            : RootPane
-        "bundle"          : BundleList
-        "bundle_new"      : BundleNew
-        "bundle_view"     : BundleView
-        "set"             : SetList
-        "set_new"         : SetNew
-        "set_view"        : SetView
+        "task"            : TaskList
+        "task_new"        : TaskNew
+        "task_view"       : TaskView
+        "task_edit"     : TaskEdit
+        "activity"             : ActivityList
+        "activity_new"         : ActivityNew
+        "activity_view"        : ActivityView
         "analytics"       : AnalyticsPane
         "account"         : AccountPane
 
@@ -56,6 +58,7 @@ define (require) ->
       @subnav.render()
 
     displayPane: (page) =>
+      console.log page
       if @currentPane
         @currentPane.cleanup()
       @currentPane = new @panes[page]

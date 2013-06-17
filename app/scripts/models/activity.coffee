@@ -2,7 +2,7 @@ define (require) ->
 
   Backbone = require 'backbone'
 
-  class SetModel extends Backbone.Model
+  class ActivityModel extends Backbone.Model
     idAttribute: "_id"
     urlRoot: "/api/set"
 

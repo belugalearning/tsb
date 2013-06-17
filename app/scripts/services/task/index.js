@@ -1,10 +1,10 @@
 define(function(require) {
   var jquery = require('jquery')
-  var evalExpressionTemplate = require('text!services/bundle/templates/eval-expression.xml')
+  var evalExpressionTemplate = require('text!services/task/templates/eval-expression.xml')
   var yTemplate = require('text!./templates/y.xml')
-  var xDivYTemplate = require('text!services/bundle/templates/xdivy.xml')
+  var xDivYTemplate = require('text!services/task/templates/xdivy.xml')
 
-  function Bundle(opts) {
+  function Task(opts) {
     this.questionType = opts.questionType
     this.vars = opts.vars
     this.numQuestions = opts.numQuestions
@@ -18,7 +18,7 @@ define(function(require) {
       [0]
   }
 
-  Bundle.prototype.evalAns = function(ans, question) {
+  Task.prototype.evalAns = function(ans, question) {
     var reqNumGrps = this.questionType == 'split_x_y_eq_grps'
       ? question.vars.y
       : question.vars.x / question.vars.y
@@ -34,22 +34,22 @@ define(function(require) {
       reqNumGrps == $groups.filter(function(i, grp) { return $(grp).children().length == reqGrpSize }).length)
   }
 
-  Bundle.prototype.createQuestion = function() {
+  Task.prototype.createQuestion = function() {
     return new Question(this)
   }
 
-  function Question(bundle) {
+  function Question(task) {
     var self = this
     this.vars = {}
 
-    var yVals = bundle.vars.y.values
+    var yVals = task.vars.y.values
     this.vars.y = yVals[ Math.floor(Math.random() * yVals.length) ]
 
-    var xVals = bundle.vars.x.values.filter(function(v) { return v > self.vars.y && v % self.vars.y == 0 })
+    var xVals = task.vars.x.values.filter(function(v) { return v > self.vars.y && v % self.vars.y == 0 })
     this.vars.x = xVals[ Math.floor(Math.random() * xVals.length) ]
 
     this.text =
-      (bundle.questionType == 'split_x_y_eq_grps'
+      (task.questionType == 'split_x_y_eq_grps'
         ? 'Split {x} into {y} equal groups'
         : 'Split {x} into equal groups of {y}'
       ).replace(/{(\w+)}/g, function(match, v) {
@@ -63,5 +63,5 @@ define(function(require) {
     this.initialState = initialState.wrap('<wrap>').parent().html()
   }
 
-  return Bundle
+  return Task
 })

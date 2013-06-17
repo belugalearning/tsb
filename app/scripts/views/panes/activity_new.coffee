@@ -2,9 +2,9 @@ define (require) ->
 
   Backbone = require 'backbone'
   Set = require 'models/set'
-  BundleCollection = require 'collections/bundles'
-  BundleListView = require 'views/lists/bundles'
-  SetNewTemplate = require 'text!templates/panes/set_new.html'
+  TaskCollection = require 'collections/bundles'
+  TaskListView = require 'views/lists/bundles'
+  SetNewTemplate = require 'text!templates/panes/activity_new.html'
 
   class SetNewPane extends Backbone.View
     template: _.template(SetNewTemplate)
@@ -15,7 +15,7 @@ define (require) ->
 
     initialize: ->
       @set = new Set()
-      @bundleList = new BundleCollection(@set.get("bundles"))
+      @taskList = new TaskCollection(@set.get("bundles"))
 
     render: =>
       tmpl = @template()
@@ -23,15 +23,15 @@ define (require) ->
       @
 
     wire: =>
-      @collection = new BundleCollection()
-      @bundleListView = new BundleListView({ collection: @bundleList , el: '#bundle-list-target', listview: true})
-      @renderBundleList();
-      @listenTo( @collection, 'reset', @renderBundlePicker )
+      @collection = new TaskCollection()
+      @taskListView = new TaskListView({ collection: @taskList , el: '#bundle-list-target', listview: true})
+      @renderTaskList();
+      @listenTo( @collection, 'reset', @renderTaskPicker )
       @collection.fetch({reset: true})
 
-    renderBundlePicker: =>
-      @bundlePicker = new BundleListView({ collection: @collection, el: '.set-bundle-picker', listview: true})
-      @bundlePicker.render()
+    renderTaskPicker: =>
+      @taskPicker = new TaskListView({ collection: @collection, el: '.set-bundle-picker', listview: true})
+      @taskPicker.render()
       @initialiseLists()
 
     initialiseLists: =>
@@ -51,17 +51,18 @@ define (require) ->
             console.log @set.get("bundles")
       )
 
-    renderBundleList: =>
+    renderTaskList: =>
       console.log "rendering bundle list"
-      @bundleListView.render()
-      console.log @bundleListView
+      @taskListView.render()
+      console.log @taskListView
 
-    fetchBundleList: =>
+    fetchTaskList: =>
       return
 
     saveSet: (e) =>
       e.preventDefault()
       e.stopPropagation()
+      @set.save();
 
     cleanup: =>
       @remove()
