@@ -1,21 +1,21 @@
 define (require) ->
 
   Backbone = require 'backbone'
-  Set = require 'models/set'
-  TaskCollection = require 'collections/bundles'
-  TaskListView = require 'views/lists/bundles'
-  SetNewTemplate = require 'text!templates/panes/activity_new.html'
+  Activity = require 'models/activity'
+  TaskCollection = require 'collections/tasks'
+  TaskListView = require 'views/lists/tasks'
+  ActivityNewTemplate = require 'text!templates/panes/activity_new.html'
 
-  class SetNewPane extends Backbone.View
-    template: _.template(SetNewTemplate)
+  class ActivityNewPane extends Backbone.View
+    template: _.template(ActivityNewTemplate)
 
     events: 
       "click .add-question" : "insertQuestion"
-      "click .submit-set" : "saveSet"
+      "click .submit-set" : "saveActivity"
 
     initialize: ->
-      @set = new Set()
-      @taskList = new TaskCollection(@set.get("bundles"))
+      @activity = new Activity()
+      @taskList = new TaskCollection(@activity.get("bundles"))
 
     render: =>
       tmpl = @template()
@@ -24,13 +24,20 @@ define (require) ->
 
     wire: =>
       @collection = new TaskCollection()
-      @taskListView = new TaskListView({ collection: @taskList , el: '#bundle-list-target', listview: true})
+      @taskListView = new TaskListView({ 
+        collection: @taskList, 
+        el: '#bundle-list-target', 
+        listview: true
+      })
       @renderTaskList();
       @listenTo( @collection, 'reset', @renderTaskPicker )
       @collection.fetch({reset: true})
 
     renderTaskPicker: =>
-      @taskPicker = new TaskListView({ collection: @collection, el: '.set-bundle-picker', listview: true})
+      @taskPicker = new TaskListView({ 
+        collection: @collection, 
+        el: '.set-bundle-picker', listview: true
+      })
       @taskPicker.render()
       @initialiseLists()
 
@@ -47,8 +54,8 @@ define (require) ->
             sort_order.map( (item) =>
               bundle_array.push(@collection.get(item))
             )
-            @set.set("bundles",bundle_array)
-            console.log @set.get("bundles")
+            @activity.set("bundles",bundle_array)
+            console.log @activity.get("bundles")
       )
 
     renderTaskList: =>

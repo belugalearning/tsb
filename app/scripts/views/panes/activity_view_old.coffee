@@ -2,7 +2,7 @@ define (require) ->
 
   Backbone = require 'backbone'
   JQueryUI = require 'jquery-ui'
-  Activity = require 'models/set'
+  Activity = require 'models/activity'
   ActivityViewTemplate = require 'text!templates/panes/set_view.html'
   ActivityPreviewModule = require 'text!templates/modules/set_preview.html'
 
