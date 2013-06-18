@@ -12,8 +12,8 @@ define (require) ->
       "click .add-question" : "insertQuestion"
 
     initialize: ->
-      if window.bundleEditID
-        console.log window.bundleEditID
+      if window.taskEditID
+        console.log window.taskEditID
         @task = new Task({ _id: window.taskEditID})
         @listenToOnce(@task, "change", @showQuestion)
         @task.fetch({ reset: true })

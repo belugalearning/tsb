@@ -57,7 +57,7 @@ define (require) ->
         @setSelectVal('.num-questions', numOfQuestions)
 
       if bundleTitle
-        @setSelectVal('.bundle-title', taskTitle)
+        @setSelectVal('.bundle-title', bundleTitle)
 
     submit: (e) =>
       e.preventDefault()
@@ -65,7 +65,10 @@ define (require) ->
       q = new BBTask(@getFormData())
       q.set(@task.attributes)
       console.log q
-      q.save({ success: @redirect })
+      q.save({},{ 
+        success: -> console.log "success"
+        error: -> console.log "error"
+      })
 
     preview: (e) =>
       e.preventDefault()
@@ -119,6 +122,9 @@ define (require) ->
 
     redirect: (model, response, options) =>
       console.log "redirect"
+
+    error: =>
+      console.log "error"
 
     resolve: (obj, prop) =>
       ns = prop.split('.')

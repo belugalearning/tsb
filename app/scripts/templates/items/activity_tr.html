@@ -1,10 +1,11 @@
 <tr>
-  <td><a href="/activity/view/<%= _id %>"><%= name %></a></td>
+  <td><a class="activity-view" href="/activity/view/<%= _id %>"><%= name %></a></td>
   <td>
     <%  bundles.map( function(item) { %>
       <span class="label label-info"><%= item.title %></span>
     <% }) %>
   </td>
   <td>Jul 3</td>
+  <td><a class="activity-edit" href="/activity/edit/<%= _id %>"><button class="btn btn-icon"><img src="/images/edit_icon.png" width="16px" height="16px"></button></a></td>
 </tr>
 

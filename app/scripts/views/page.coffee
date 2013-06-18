@@ -11,6 +11,7 @@ define (require) ->
   ActivityList      = require 'views/panes/activity_list'
   ActivityNew       = require 'views/panes/activity_new'
   ActivityView      = require 'views/panes/activity_view'
+  ActivityEdit      = require 'views/panes/activity_edit'
 
   AnalyticsPane     = require 'views/panes/analytics'
   AccountPane       = require 'views/panes/account'
@@ -37,6 +38,7 @@ define (require) ->
         "activity"             : ActivityList
         "activity_new"         : ActivityNew
         "activity_view"        : ActivityView
+        "activity_edit"   : ActivityEdit
         "analytics"       : AnalyticsPane
         "account"         : AccountPane
 

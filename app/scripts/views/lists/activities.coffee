@@ -7,7 +7,8 @@ define (require) ->
     template: _.template(ActivityItemTemplate)
 
     events:
-      "click a": "navigate"
+      "click .activity-view": "navigate"
+      "click .activity-edit": "navigate"
 
     initialize: ->
       console.log @options.collection
@@ -19,5 +20,6 @@ define (require) ->
         @$el.append(@template(item.attributes))
 
     navigate: (e) =>
+      console.log e
       e.preventDefault()
-      Backbone.history.navigate(e.target.attributes.href.value, true)
+      Backbone.history.navigate(e.currentTarget.attributes.href.value, true)

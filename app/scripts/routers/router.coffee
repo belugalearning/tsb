@@ -4,17 +4,18 @@ define (require) ->
 
   class MainRouter extends Backbone.Router
     routes:
-      ''                : 'Root'
-      '/'               : 'Root'
-      'task'            : 'TaskList'
-      'task/new'        : 'TaskNew'
-      'task/view/:id'   : 'TaskView'
-      'task/edit/:id'   : 'TaskEdit'
-      'activity'             : 'Activity'
-      'activity/new'         : 'ActivityNew'
-      'activity/view/:id'    : 'ActivityView'
-      'analytics'       : 'Analytics'
-      'account'         : 'Account'
+      ''                  : 'Root'
+      '/'                 : 'Root'
+      'task'              : 'TaskList'
+      'task/new'          : 'TaskNew'
+      'task/view/:id'     : 'TaskView'
+      'task/edit/:id'     : 'TaskEdit'
+      'activity'          : 'Activity'
+      'activity/new'      : 'ActivityNew'
+      'activity/view/:id' : 'ActivityView'
+      'activity/edit/:id' : 'ActivityEdit'
+      'analytics'         : 'Analytics'
+      'account'           : 'Account'
 
     initialize: ->
       @app = arguments[0].app
@@ -43,10 +44,16 @@ define (require) ->
       @app.setCurrentPane('activity')
 
     ActivityNew: =>
+      window.activityEditID = null
       @app.setCurrentPane('activity_new')
     
     ActivityView: =>
       @app.setCurrentPane('activity_view')
+
+    ActivityEdit: (id) =>
+      #TODO: remove global, pass id into setCurrentPane
+      window.activityEditID = id
+      @app.setCurrentPane('activity_edit')
 
     Analytics: =>
       @app.setCurrentPane('analytics')

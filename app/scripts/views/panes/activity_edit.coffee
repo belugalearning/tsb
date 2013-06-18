@@ -3,6 +3,7 @@ define (require) ->
   Backbone = require 'backbone'
   Activity = require 'models/activity'
   TaskCollection = require 'collections/tasks'
+  ActivityForm= require 'views/modules/activity_form'
   TaskListView = require 'views/lists/tasks'
   ActivityNewTemplate = require 'text!templates/panes/activity_new.html'
 
@@ -14,7 +15,12 @@ define (require) ->
       "click .submit-set" : "saveActivity"
 
     initialize: ->
-      @activity = new Activity()
+      if window.activityEditID
+        @activity = new Activity({ _id: activityEditID })
+        @listenToOnce(@activity, "change", @showActivityForm)
+        @activity.fetch({ reset: true })
+      else 
+        @activity = new Activity()
       @taskList = new TaskCollection(@activity.get("bundles"))
 
     render: =>
@@ -32,6 +38,9 @@ define (require) ->
       @renderTaskList();
       @listenTo( @collection, 'reset', @renderTaskPicker )
       @collection.fetch({reset: true})
+
+    showActivityForm: =>
+      console.log @activity
 
     renderTaskPicker: =>
       @taskPicker = new TaskListView({ 
@@ -67,13 +76,10 @@ define (require) ->
     fetchTaskList: =>
       return
 
-    saveActivity: (e) =>
+    saveSet: (e) =>
       e.preventDefault()
       e.stopPropagation()
-      @activity.save({},{success: @redirect});
-
-    redirect: =>
-      console.log("redirect")
+      @set.save();
 
     cleanup: =>
       @remove()
