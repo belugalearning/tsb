@@ -10,6 +10,9 @@ define (require) ->
     template: _.template(TaskViewTemplate)
     taskTemplate: _.template(TaskPreviewTemplate)
 
+    events:
+      "click a": "navigate"
+
     initialize: ->
       @task = new Task({ _id: window.taskViewID })
       window.tmp = @task
@@ -38,6 +41,11 @@ define (require) ->
       console.log "fetch task"
       @task.fetch({reset: true})
     
+    navigate: (e) =>
+      console.log e
+      e.preventDefault()
+      Backbone.history.navigate(e.currentTarget.attributes.href.value, true)
+
     cleanup: =>
       console.log "cleanup cocos2d -- nothing required, will replace scene later"
     

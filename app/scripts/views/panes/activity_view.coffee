@@ -11,7 +11,7 @@ define (require) ->
     activityModule: _.template(ActivityPreviewModule)
 
     events:
-      'click .save-set': 'saveSet'
+      "click a": "navigate"
 
     initialize: ->
       @setId = window.setViewID
@@ -34,5 +34,10 @@ define (require) ->
     wire: =>
       @thisActivity.fetch({reset: true})
     
+    navigate: (e) =>
+      console.log e
+      e.preventDefault()
+      Backbone.history.navigate(e.currentTarget.attributes.href.value, true)
+      
     cleanup: =>
       @remove()
