@@ -5,4 +5,4 @@ define (require) ->
 
   class ActivityCollection extends Backbone.Collection
     model: Activity
-    url: "/api/sets"
+    url: "/api/activities"

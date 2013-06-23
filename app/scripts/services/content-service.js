@@ -5,15 +5,15 @@ var contentService
     this.setTask(null)
   }
 
-  ContentService.prototype.setTask = function(bundle) {
-    this.bundle = bundle
+  ContentService.prototype.setTask = function(task) {
+    this.task = task
     this.currentQuestionIx = -1
     this.questions = []
   }
 
   ContentService.prototype.nextQuestion = function() {
-    if (!this.bundle) return null
-    this.questions[++this.currentQuestionIx] = this.bundle.createQuestion()
+    if (!this.task) return null
+    this.questions[++this.currentQuestionIx] = this.task.createQuestion()
     return this.currentQuestion()
   }
 
@@ -22,7 +22,7 @@ var contentService
   }
 
   ContentService.prototype.evalAns = function(ans) {
-    return this.bundle.evalAns(ans, this.currentQuestion())
+    return this.task.evalAns(ans, this.currentQuestion())
   }
 
   contentService = new ContentService()

@@ -5,7 +5,7 @@ define (require) ->
   QuestionTemplate = require 'text!templates/questions/test_question.html'
   QuestionModel = require 'models/questions/test_question'
   BBTask = require 'models/task'
-  Bundle = require 'services/task/index'
+  Task = require 'services/task/index'
 
   class TestQuestion extends Backbone.View
     template: _.template(QuestionTemplate)
@@ -28,15 +28,15 @@ define (require) ->
 
       questionType = @task.get('questionType')
 
-      if @resolve(@task.get('vars'), "x.values")  
+      if @resolve(@task.get('vars'), "x.values")
         xVars = @task.get('vars').x.values
 
-      if @resolve(@task.get('vars'), "x.values") 
+      if @resolve(@task.get('vars'), "x.values")
         yVars = @task.get('vars').y.values
 
       tool = @task.get('tool')
       numOfQuestions = @task.get('numQuestions')
-      bundleTitle = @task.get('title') 
+      bundleTitle = @task.get('title')
 
       if questionType
         @setSelectVal('.question-type', questionType)
@@ -49,7 +49,7 @@ define (require) ->
 
       if yVars
         @setCheckboxVals('.equation-y-checkboxes', yVars)
-      
+
       if tool
         @setSelectVal('.tool', tool)
 
@@ -65,7 +65,7 @@ define (require) ->
       q = new BBTask(@getFormData())
       q.set(@task.attributes)
       console.log q
-      q.save({},{ 
+      q.save({},{
         success: -> console.log "success"
         error: -> console.log "error"
       })
@@ -75,7 +75,7 @@ define (require) ->
       e.stopPropagation()
       taskOpts = @getFormData()
       console.log(taskOpts)
-      contentService.setBundle(new Task(taskOpts))
+      contentService.setTask(new Task(taskOpts))
       @preview = new PreviewView({ el: ".preview-area" }).render()
       $('html, body').animate({ scrollTop: $(".preview-area").offset().top}, 2000)
 
@@ -113,7 +113,7 @@ define (require) ->
           parseInt($(opt).prop('value'), 10)
         .filter (val) =>
           from <= val && val <= to
-    
+
     getCheckboxIntVals: (selector) =>
       allVals = []
       $(selector + ' :checked').each ->
@@ -131,4 +131,3 @@ define (require) ->
       while obj && ns[0]
         obj = obj[ns.shift()] || undefined
       return obj
-

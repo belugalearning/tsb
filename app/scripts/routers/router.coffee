@@ -4,18 +4,18 @@ define (require) ->
 
   class MainRouter extends Backbone.Router
     routes:
-      ''                  : 'Root'
-      '/'                 : 'Root'
-      'task'              : 'TaskList'
-      'task/new'          : 'TaskNew'
-      'task/view/:id'     : 'TaskView'
-      'task/edit/:id'     : 'TaskEdit'
-      'activity'          : 'Activity'
-      'activity/new'      : 'ActivityNew'
-      'activity/view/:id' : 'ActivityView'
-      'activity/edit/:id' : 'ActivityEdit'
-      'analytics'         : 'Analytics'
-      'account'           : 'Account'
+      ''                    : 'Root'
+      '/'                   : 'Root'
+      'tasks'               : 'TaskList'
+      'tasks/new'           : 'TaskNew'
+      'tasks/view/:id'      : 'TaskView'
+      'tasks/edit/:id'      : 'TaskEdit'
+      'activities'          : 'Activity'
+      'activities/new'      : 'ActivityNew'
+      'activities/view/:id' : 'ActivityView'
+      'activities/edit/:id' : 'ActivityEdit'
+      'analytics'           : 'Analytics'
+      'account'             : 'Account'
 
     initialize: ->
       @app = arguments[0].app

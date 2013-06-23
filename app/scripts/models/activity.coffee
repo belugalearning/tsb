@@ -4,9 +4,10 @@ define (require) ->
 
   class ActivityModel extends Backbone.Model
     idAttribute: "_id"
-    urlRoot: "/api/set"
+    urlRoot: "/api/activities"
 
     defaults:
       _id         : null
       _rev        : null
-      bundles     : []
+      type        : 'activity'
+      tasks       : []

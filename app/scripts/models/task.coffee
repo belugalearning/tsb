@@ -4,4 +4,7 @@ define (require) ->
 
   class TaskModel extends Backbone.Model
     idAttribute: "_id"
-    urlRoot: "/api/bundle"
+    urlRoot: "/api/tasks"
+
+    defaults:
+      type        : 'task'

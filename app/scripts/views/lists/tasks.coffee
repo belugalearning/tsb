@@ -20,7 +20,7 @@ define (require) ->
 
     render: =>
       $(".list-loading-indicator").remove()
-      @$el.empty();
+      @$el.empty()
       @collection.each (item) =>
         @$el.append(@template(item.attributes))
 
@@ -31,7 +31,7 @@ define (require) ->
 
     delete: (e) =>
       e.preventDefault()
-      r = confirm("Are you sure you want to delete this Task?");
+      r = confirm("Are you sure you want to delete this Task?")
       if r
         task_model = @collection.get(e.currentTarget.pathname.split('/').slice(-1)[0])
         @collection.remove(task_model)

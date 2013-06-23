@@ -5,4 +5,4 @@ define (require) ->
 
   class TaskCollection extends Backbone.Collection
     model: Task
-    url: "/api/bundles"
+    url: "/api/tasks"

@@ -1,14 +1,14 @@
 <tr>
   <% var dateobj = new Date(created) %>
-  <td><a class="bundle-view" href="/task/view/<%= _id %>"><%= title %></a></td>
+  <td><a class="bundle-view" href="/tasks/view/<%= _id %>"><%= title %></a></td>
   <td><%= author %></td>
   <td><%= dateobj.toDateString() %></td>
   <td>
-    <a class="bundle-edit" href="/task/edit/<%= _id %>">
+    <a class="bundle-edit" href="/tasks/edit/<%= _id %>">
       <button class="btn btn-icon"><img src="/images/edit_icon.png" width="16px" height="16px">
       </button>
     </a>
-    <a class="bundle-delete" href="/task/delete/<%= _id %>">
+    <a class="bundle-delete" href="/tasks/delete/<%= _id %>">
       <button class="btn btn-icon"><img src="/images/delete_icon.png" width="16px" height="16px">
       </button>
     </a>
