@@ -1,9 +1,9 @@
 {
   "_id": "_design/gen", 
   "views": {
-    "bundles": {
+    "by-type-created": {
       "map": "function (doc) {
-        if (doc.type == 'bundle') emit(new Date(doc.created).toJSON())
+        emit([doc.type, new Date(doc.created).toJSON()])
       }"
     }
   }
